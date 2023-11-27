@@ -24,8 +24,8 @@
                     <li><a href="#">contacto</a></li>
                 </ul>
                 <div class="botons">
-                    <a href="?c=Roles&a=createRol" class="btn-2">inicio secion</a>
-                    <a href="#" class="btn-2">registrar</a>
+                    <a href="?c=Roles&a=createRol" class="btn-2">Registrar </a>
+                    <a href="#" class="btn-2">Inicio Sesion</a>
                 </div>
             </nav>
             
