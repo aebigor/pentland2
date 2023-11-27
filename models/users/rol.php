@@ -5,8 +5,9 @@
         private $dbh;
         private $code;
         private $nombre;
-        private $usuario;
-        private $password;
+        private $apellidos;
+        private $Correo;
+        private $passCorreo;
         // Métodos
         # Sobrecarga de Constructores
         public function __construct(){
@@ -21,12 +22,12 @@
                 die($e->getMessage());
             } 
         }
-        public function __construct2($code, $nombre, $apellidos, $correo, $passCorreo){
-            $this->code = $code;
+        public function __construct2( $nombre, $apellidos, $correo, $passCorreo){
+           
             $this->nombre = $nombre;
-            $this->apellido = $apellido;
+            $this->apellidos = $apellidos;
             $this->correo = $correo;
-            $this->password = $password;
+            $this->passCorreo = $passCorreo;
         }
         // Métodos set() y get()        
         # code: set()
@@ -38,43 +39,73 @@
             return $this->code;
         }        
         # nombre: set()
-        public function setnombre($nombre){
+        public function setNombre($nombre){
             $this->nombre = $nombre;
         }
         # nombre: get()
-        public function getnombre(){
+        public function getNombre(){
             return $this->nombre;
         }
 
         # apellido: set()
-        public function setapellido(){
-            return $this->apellido;
+        public function setapellidos(){
+            return $this->apellidos;
         }
-        #apellidos: get()
-        public function getapellido(){
-            return $this->appelido;
+        #apellidoss: get()
+        public function getapellidos(){
+            return $this->apellidos;
         }
         #usuario: set()
-        public function setcorreo(){
-            return $this->correo;
+        public function setCorreo(){
+            return $this->Correo;
         }
         #usuario: get()
-        public function getcorreo(){
-            return $this->correo;
+        public function getCorreo(){
+            return $this->Correo;
         }
 
         public function setpassCorreo(){
             return $this->passCorreo;
         }
         public function getpassCorreo(){
-            return $this->passCorro;
+            return $this->passCorreo;
         }
         // ****** 2da Parte: Persistencia DB (CRUD) ****** //
 
         # CU09 - Registrar Rol
         public function createrol(){
             try {
-                $sql = 'INSERT INTO usuario VALUES (:Code,:Nombre,:Apellido,:Correo,:passCorreo)';
+                $sql = 'INSERT INTO usuario VALUES (:code,:Nombre,:Apellido,:Correo,:passCorreo)';
+                $stmt = $this->dbh->prepare($sql);
+                $stmt->bindValue('code', $this->getCode());
+                $stmt->bindValue('Nombre', $this->getNombre());
+                $stmt->bindValue('Apellido', $this->getapellidos());
+                $stmt->bindValue('Correo', $this->getCorreo());
+                $stmt->bindValue('passCorreo', $this->getpassCorreo());
+
+                $stmt->execute();
+            } catch (Exception $e) {
+                die($e->getMessage());
+            }
+        }
+        public function createrolAdmin(){
+            try {
+                $sql = 'INSERT INTO administrador VALUES (:Code,:Nombre,:Apellido,:Correo,:passCorreo)';
+                $stmt = $this->dbh->prepare($sql);
+                $stmt->bindValue('code', $this->getCode());
+                $stmt->bindValue('Nombre', $this->getnombre());
+                $stmt->bindValue('Apellidos', $this->getapellido());
+                $stmt->bindValue('Correo', $this->getcorreo());
+                $stmt->bindValue('passCorreo', $this->getpassCorreo());
+
+                $stmt->execute();
+            } catch (Exception $e) {
+                die($e->getMessage());
+            }
+        }
+        public function createrolVendedor(){
+            try {
+                $sql = 'INSERT INTO Vendedor VALUES (:Code,:Nombre,:Apellido,:Correo,:passCorreo)';
                 $stmt = $this->dbh->prepare($sql);
                 $stmt->bindValue('code', $this->getCode());
                 $stmt->bindValue('Nombre', $this->getnombre());

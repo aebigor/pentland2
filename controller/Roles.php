@@ -1,4 +1,5 @@
-<?php
+<?php session_start();
+require_once "models/users/rol.php";
 
     class Roles{
         public function main(){
@@ -6,6 +7,48 @@
         }
         // Registrar Rol
         public function createRol(){
+            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+                require_once "views/registro/header.php";
+                require_once "views/registro/footer.php";
+            }
+            
+            
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $rol = new Rol(
+                
+                    $_POST['code'],
+                    $_POST['nombre'],
+                    $_POST['apellidos'],
+                    $_POST['correo'],
+                    $_POST['passCorreo']
+                    
+                );                
+                $rol->createRol();
+                header("Location: ./views/menu/header.php");
+            }
+        }
+        public function createRolVendedor(){
+            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+                require_once "views/registroV/header.php";
+                require_once "views/registroV/footer.php";
+            }
+            
+            
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $rol = new Rol(
+                    null,
+                    $_POST['code'],
+                    $_POST['nombre'],
+                    $_POST['apellido'],
+                    $_POST['usuario'],
+                    $_POST['password']
+                    
+                );                
+                $rol->rolCreate();
+                header("Location: Menu.php");
+            }
+        }
+        public function createRolAdministrador(){
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 require_once "views/registro/header.php";
                 require_once "views/registro/footer.php";

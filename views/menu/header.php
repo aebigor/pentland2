@@ -25,7 +25,7 @@
                 </ul>
                 <div class="botons">
                     <a href="?c=Roles&a=createRol" class="btn-2">inicio secion</a>
-                    <a href="#" class="btn-2">registrar</a>
+                    <a href="?c=Roles" class="btn-2">registrar</a>
                 </div>
             </nav>
             
