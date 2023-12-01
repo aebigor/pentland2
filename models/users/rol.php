@@ -3,11 +3,11 @@
         // ****** 1er Parte: Clase (POO) *************** //
         // Atributos: Encapsulamiento
         private $dbh;
-        private $code;
-        private $nombre;
-        private $apellidos;
-        private $Correo;
-        private $passCorreo;
+        protected $code;
+        protected $nombre;
+        protected $apellidos;
+        protected $correo;
+        protected $passCorreo;
         // Métodos
         # Sobrecarga de Constructores
         public function __construct(){
@@ -20,30 +20,37 @@
                 }
             } catch (Exception $e) {
                 die($e->getMessage());
-            } 
+            }
         }
         public function __construct2( $nombre, $apellidos, $correo, $passCorreo){
-           
+
             $this->nombre = $nombre;
             $this->apellidos = $apellidos;
             $this->correo = $correo;
             $this->passCorreo = $passCorreo;
         }
-        // Métodos set() y get()        
+        public function __construct3($code, $nombre, $apellidos, $correo, $passCorreo){
+           $this->code= $code;
+            $this->nombre = $nombre;
+            $this->apellidos = $apellidos;
+            $this->correo = $correo;
+            $this->passCorreo = $passCorreo;
+        }
+        // Métodos set() y get()
         # code: set()
         public function setcode($code){
             $this->code = $code;
         }
         # code: get()
-        public function getCode(){
+        public function getcode(){
             return $this->code;
-        }        
+        }
         # nombre: set()
-        public function setNombre($nombre){
+        public function setnombre($nombre){
             $this->nombre = $nombre;
         }
         # nombre: get()
-        public function getNombre(){
+        public function getnombre(){
             return $this->nombre;
         }
 
@@ -56,12 +63,12 @@
             return $this->apellidos;
         }
         #usuario: set()
-        public function setCorreo(){
-            return $this->Correo;
+        public function setcorreo(){
+            return $this->correo;
         }
         #usuario: get()
-        public function getCorreo(){
-            return $this->Correo;
+        public function getcorreo(){
+            return $this->correo;
         }
 
         public function setpassCorreo(){
@@ -74,19 +81,21 @@
 
         # CU09 - Registrar Rol
         public function createrol(){
-            try {
-                $sql = 'INSERT INTO usuario VALUES (:code,:Nombre,:Apellido,:Correo,:passCorreo)';
+              try {
+                $sql = 'INSERT INTO USUARIO  VALUES (:Codigo,:Nombre,:Apellido,:Correo,:passCorreo)';
                 $stmt = $this->dbh->prepare($sql);
-                $stmt->bindValue('code', $this->getCode());
-                $stmt->bindValue('Nombre', $this->getNombre());
+                $stmt->bindValue('Codigo', $this->getCode());
+                $stmt->bindValue('Nombre', $this->getnombre());
                 $stmt->bindValue('Apellido', $this->getapellidos());
-                $stmt->bindValue('Correo', $this->getCorreo());
+                $stmt->bindValue('Correo', $this->getcorreo());
                 $stmt->bindValue('passCorreo', $this->getpassCorreo());
-
-                $stmt->execute();
-            } catch (Exception $e) {
-                die($e->getMessage());
-            }
+                
+                     $stmt->execute();
+                    } catch (PDOException $e) {
+                        // Captura y maneja los errores de PDO
+                        die("Error en la consulta: " . $e->getMessage());
+                    }
+                
         }
         public function createrolAdmin(){
             try {
@@ -123,13 +132,13 @@
             try {
                 $rolList = [];
                 $sql = 'SELECT * FROM ROLES';
-                $stmt = $this->dbh->query($sql);                
+                $stmt = $this->dbh->query($sql);
                 foreach ($stmt->fetchAll() as $rol) {
                     $rolList[] = new Rol(
                         $rol['rol_code'],
                         $rol['rol_name']
                     );
-                }                
+                }
                 return $rolList;
             } catch (Exception $e) {
                 die($e->getMessage());
@@ -141,12 +150,12 @@
                 $sql = "SELECT * FROM ROLES WHERE rol_code=:code";
                 $stmt = $this->dbh->prepare($sql);
                 $stmt->bindValue('code', $code);
-                $stmt->execute();                
-                $rolDb = $stmt->fetch();                
+                $stmt->execute();
+                $rolDb = $stmt->fetch();
                 $rol = new Rol(
                     $rolDb['rol_code'],
                     $rolDb['rol_name']
-                );                
+                );
                 return $rol;
             } catch (Exception $e) {
                 die($e->getMessage());
@@ -154,7 +163,7 @@
         }
         # CUXX - Actualizar Rol
         public function rolUpdate(){
-            try {                
+            try {
                 $sql = 'UPDATE ROLES SET
                             rol_code = :code,
                             rol_name = :nombre
@@ -176,7 +185,7 @@
                 $stmt->execute();
             } catch (Exception $e) {
                 die($e->getMessage());
-            } 
+            }
         }
-    }    
+    }
 ?>

@@ -10,9 +10,7 @@
                 <input class="controls" type="password" name="passCorreo" id="passCorreo" placeholder="Ingrese su contraseña" required>
                 <p>Estoy de acuerdo con <a href="#">Términos y Condiciones</a></p>
                 <button class="botons" type="submit" name="registro">Registrar</button>
-                <button class="admin-button">
-                <i class="fas fa-user-shield"></i> Administrador
-                </button>
+                
                
                 <p><a href="http://localhost/pentland/inicio-secion.php">¿Ya tengo cuenta?</a></p>
             </fieldset>

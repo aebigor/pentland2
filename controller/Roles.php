@@ -15,7 +15,7 @@ require_once "models/users/rol.php";
             
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $rol = new Rol(
-                
+                    null,
                     $_POST['code'],
                     $_POST['nombre'],
                     $_POST['apellidos'],
@@ -24,7 +24,7 @@ require_once "models/users/rol.php";
                     
                 );                
                 $rol->createRol();
-                header("Location: ./views/menu/header.php");
+                header("Location: ?c=Roles");
             }
         }
         public function createRolVendedor(){
@@ -73,9 +73,9 @@ require_once "models/users/rol.php";
         public function readRol(){
             $roles = new Rol;
             $roles = $roles->rolRead();
-            require_once "views/roles/admin/header.view.php";
-            require_once "views/modules/mod01_users/rol_read.view.php";
-            require_once "views/roles/admin/footer.view.php";            
+            require_once "views/menu/header.php";
+            require_once "views/menu/categori.php";
+            require_once "views/menu/footer.php";            
         }
         // Actualizar Rol
         public function updateRol(){

@@ -4,7 +4,7 @@
 
 <div class="box-container" id="lista-1">
     <div class="box">
-        <img src="imagenes/dogourmet.jpg" alt="">
+        <img src="img/dogourmet.jpg" alt="">
         <div class="product-txt">
             <h3>listado</h3>
             <p>calidad premium</p>
@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="box">
-        <img src="imagenes/filpo-adulto.jpg" alt="">
+        <img src="img/filpo-adulto.jpg" alt="">
         <div class="product-txt">
             <h3>listado</h3>
             <p>calidad premium</p>
@@ -22,7 +22,7 @@
         </div>
     </div>
     <div class="box">
-        <img src="imagenes/producto-ringo.png" alt="">
+        <img src="img/producto-ringo.png" alt="">
         <div class="product-txt">
             <h3>listado</h3>
             <p>calidad premium</p>
@@ -31,7 +31,7 @@
         </div>
     </div>
     <div class="box">
-        <img src="imagenes/prd1.jpeg" alt="">
+        <img src="img/prd1.jpeg" alt="">
         <div class="product-txt">
             <h3>listado</h3>
             <p>calidad premium</p>
@@ -40,7 +40,7 @@
         </div>
     </div>
     <div class="box">
-        <img src="imagenes/prd2.jpeg" alt="">
+        <img src="img/prd2.jpeg" alt="">
         <div class="product-txt">
             <h3>listado</h3>
             <p>calidad premium</p>
@@ -49,7 +49,7 @@
         </div>
     </div>
     <div class="box">
-        <img src="imagenes/prd3.jpeg" alt="">
+        <img src="img/prd3.jpeg" alt="">
         <div class="product-txt">
             <h3>listado</h3>
             <p>calidad premium</p>
@@ -58,7 +58,7 @@
         </div>
     </div>
     <div class="box">
-        <img src="imagenes/prd4.jpeg" alt="">
+        <img src="img/prd4.jpeg" alt="">
         <div class="product-txt">
             <h3>listado</h3>
             <p>calidad premium</p>
@@ -67,7 +67,7 @@
         </div>
     </div>
     <div class="box">
-        <img src="imagenes/prd5.jpeg" alt="">
+        <img src="img/prd5.jpeg" alt="">
         <div class="product-txt">
             <h3>listado</h3>
             <p>calidad premium</p>
@@ -76,7 +76,7 @@
         </div>
     </div>
     <div class="box">
-        <img src="imagenes/prd6.jpeg" alt="">
+        <img src="img/prd6.jpeg" alt="">
         <div class="product-txt">
             <h3>listado</h3>
             <p>calidad premium</p>
@@ -85,7 +85,7 @@
         </div>
     </div>
     <div class="box">
-        <img src="imagenes/prd7.jpeg" alt="">
+        <img src="img/prd7.jpeg" alt="">
         <div class="product-txt">
             <h3>listado</h3>
             <p>calidad premium</p>
@@ -94,7 +94,7 @@
         </div>
     </div>
     <div class="box">
-        <img src="imagenes/prd8.jpeg" alt="">
+        <img src="img/prd8.jpeg" alt="">
         <div class="product-txt">
             <h3>listado</h3>
             <p>calidad premium</p>
@@ -103,7 +103,7 @@
         </div>
     </div>
     <div class="box">
-        <img src="imagenes/prd9.jpeg" alt="">
+        <img src="img/prd9.jpeg" alt="">
         <div class="product-txt">
             <h3>listado</h3>
             <p>calidad premium</p>
@@ -112,7 +112,7 @@
         </div>
     </div>
     <div class="box">
-        <img src="imagenes/prd10.jpeg" alt="">
+        <img src="img/prd10.jpeg" alt="">
         <div class="product-txt">
             <h3>listado</h3>
             <p>calidad premium</p>
@@ -121,7 +121,7 @@
         </div>
     </div>
     <div class="box">
-        <img src="imagenes/prd11.jpeg" alt="">
+        <img src="img/prd11.jpeg" alt="">
         <div class="product-txt">
             <h3>listado</h3>
             <p>calidad premium</p>
@@ -130,7 +130,7 @@
         </div>
     </div>
     <div class="box">
-        <img src="imagenes/prd12.jpeg" alt="">
+        <img src="img/prd12.jpeg" alt="">
         <div class="product-txt">
             <h3>listado</h3>
             <p>calidad premium</p>
@@ -139,7 +139,7 @@
         </div>
     </div>
     <div class="box">
-        <img src="imagenes/producto-ringo.png" alt="">
+        <img src="img/producto-ringo.png" alt="">
         <div class="product-txt">
             <h3>listado</h3>
             <p>calidad premium</p>
@@ -148,7 +148,7 @@
         </div>
     </div>
     <div class="box">
-        <img src="imagenes/producto-ringo.png" alt="">
+        <img src="img/producto-ringo.png" alt="">
         <div class="product-txt">
             <h3>listado</h3>
             <p>calidad premium</p>
@@ -157,7 +157,7 @@
         </div>
     </div>
     <div class="box">
-        <img src="imagenes/producto-ringo.png" alt="">
+        <img src="img/producto-ringo.png" alt="">
         <div class="product-txt">
             <h3>listado</h3>
             <p>calidad premium</p>
@@ -166,7 +166,7 @@
         </div>
     </div>
     <div class="box">
-        <img src="imagenes/producto-ringo.png" alt="">
+        <img src="img/producto-ringo.png" alt="">
         <div class="product-txt">
             <h3>listado</h3>
             <p>calidad premium</p>
@@ -175,7 +175,7 @@
         </div>
     </div>
     <div class="box">
-        <img src="imagenes/producto-ringo.png" alt="">
+        <img src="img/producto-ringo.png" alt="">
         <div class="product-txt">
             <h3>listado</h3>
             <p>calidad premium</p>
@@ -184,7 +184,7 @@
         </div>
     </div>
     <div class="box">
-        <img src="imagenes/producto-ringo.png" alt="">
+        <img src="img/producto-ringo.png" alt="">
         <div class="product-txt">
             <h3>listado</h3>
             <p>calidad premium</p>
@@ -193,7 +193,7 @@
         </div>
     </div>
     <div class="box">
-        <img src="imagenes/producto-ringo.png" alt="">
+        <img src="img/producto-ringo.png" alt="">
         <div class="product-txt">
             <h3>listado</h3>
             <p>calidad premium</p>
@@ -202,7 +202,7 @@
         </div>
     </div>
     <div class="box">
-        <img src="imagenes/producto-ringo.png" alt="">
+        <img src="img/producto-ringo.png" alt="">
         <div class="product-txt">
             <h3>listado</h3>
             <p>calidad premium</p>
@@ -211,7 +211,7 @@
         </div>
     </div>
     <div class="box">
-        <img src="imagenes/producto-ringo.png" alt="">
+        <img src="img/producto-ringo.png" alt="">
         <div class="product-txt">
             <h3>listado</h3>
             <p>calidad premium</p>

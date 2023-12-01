@@ -22,11 +22,13 @@
                     <li><a href="#">servicios</a></li>
                     <li><a href="#">productos</a></li>
                     <li><a href="#">contacto</a></li>
+                    <li><a href="?c=Roles" >inicio secion</a></li>
+                    <li><a href="?c=Roles&a=createRol" >registrar</a></li>
+                    
                 </ul>
                 <div class="botons">
 
-                    <a href="?c=Roles&a=createRol" class="btn-2">inicio secion</a>
-                    <a href="?c=Roles" class="btn-2">registrar</a>
+                    
 
                     
 

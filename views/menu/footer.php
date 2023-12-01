@@ -115,8 +115,8 @@
         </div>
     </footer>
 
-<script src="funcionmenu.js" ></script>
-<script src="carrusel.js" ></script>
+<script src="asset/js/funcionmenu.js" ></script>
+<script src="asset/js/carrusel.js" ></script>
 </body>
 
 </html>
