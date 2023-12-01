@@ -24,15 +24,19 @@
                     <li><a href="#">contacto</a></li>
                 </ul>
                 <div class="botons">
+
                     <a href="?c=Roles&a=createRol" class="btn-2">inicio secion</a>
                     <a href="?c=Roles" class="btn-2">registrar</a>
+
+                    
+
                 </div>
             </nav>
             
             <div>
                 <ul>
                     <li class="submenu">
-                        <img id="img-carrito" src="imagenes/car.svg" alt="car">
+                        <img id="img-carrito" src="img/car.svg" alt="car">
                         <div id="carrito">
                             <table id="lista-carrito">
                                 <thead>
@@ -63,13 +67,13 @@
             </div>
             <div id="drag-container">
                 <div id="spin-container">
-                    <!--imagenes del carrusel -->
-                    <img src="http://localhost/imagenes/prd1.jpeg" alt="">
-                    <img src="http://localhost/imagenes/prd2.jpeg" alt="">
-                    <img src="http://localhost/imagenes/prd3.jpeg" alt="">
-                    <img src="http://localhost/imagenes/prd4.jpeg" alt="">
-                    <img src="http://localhost/imagenes/prd5.jpeg" alt="">
-                    <img src="http://localhost/imagenes/prd6.jpeg" alt="">
+                    <!--img del carrusel -->
+                    <img src="img/prd1.jpeg" alt="">
+                    <img src="img/prd2.jpeg" alt="">
+                    <img src="img/prd3.jpeg" alt="">
+                    <img src="img/prd4.jpeg" alt="">
+                    <img src="img/prd5.jpeg" alt="">
+                    <img src="img/prd6.jpeg" alt="">
                     <p> ofertas especiales</p>
                 </div>
                 <div id="ground"></div>
