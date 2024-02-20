@@ -3,11 +3,12 @@
         // ****** 1er Parte: Clase (POO) *************** //
         // Atributos: Encapsulamiento
         private $dbh;
-        protected $code;
+        protected $Codigo;
         protected $nombre;
         protected $apellidos;
         protected $correo;
         protected $passCorreo;
+        
         // Métodos
         # Sobrecarga de Constructores
         public function __construct(){
@@ -22,29 +23,25 @@
                 die($e->getMessage());
             }
         }
-        public function __construct2( $nombre, $apellidos, $correo, $passCorreo){
-
+        public function __construct4( $nombre , $apellidos , $correo , $passCorreo){
+        
             $this->nombre = $nombre;
             $this->apellidos = $apellidos;
             $this->correo = $correo;
             $this->passCorreo = $passCorreo;
+        
+            // Resto del código...
         }
-        public function __construct3($code, $nombre, $apellidos, $correo, $passCorreo){
-           $this->code= $code;
-            $this->nombre = $nombre;
-            $this->apellidos = $apellidos;
-            $this->correo = $correo;
-            $this->passCorreo = $passCorreo;
-        }
+   
         // Métodos set() y get()
-        # code: set()
-        public function setcode($code){
-            $this->code = $code;
-        }
-        # code: get()
-        public function getcode(){
-            return $this->code;
-        }
+        # Codigo: set()
+       # public function setCodigo($Codigo){
+       #     $this->Codigo = $Codigo;
+       # }
+       # # Codigo: get()
+       # public function getCodigo(){
+       #     return $this->Codigo;
+       # }
         # nombre: set()
         public function setnombre($nombre){
             $this->nombre = $nombre;
@@ -54,57 +51,75 @@
             return $this->nombre;
         }
 
-        # apellido: set()
-        public function setapellidos(){
-            return $this->apellidos;
+  // (continuación desde donde lo dejaste)
+        #apellido: set()
+        public function setapellidos($apellidos){
+            $this->apellidos = $apellidos;
         }
-        #apellidoss: get()
+        #apellidos: get()
         public function getapellidos(){
             return $this->apellidos;
         }
-        #usuario: set()
-        public function setcorreo(){
-            return $this->correo;
+        #correo: set()
+        public function setcorreo($correo){
+            $this->correo = $correo;
         }
-        #usuario: get()
+        #correo: get()
         public function getcorreo(){
             return $this->correo;
         }
 
-        public function setpassCorreo(){
-            return $this->passCorreo;
+        #passCorreo: set()
+        public function setpassCorreo($passCorreo){
+            $this->passCorreo = $passCorreo;
         }
+        #passCorreo: get()
         public function getpassCorreo(){
             return $this->passCorreo;
         }
-        // ****** 2da Parte: Persistencia DB (CRUD) ****** //
+    
+
 
         # CU09 - Registrar Rol
         public function createrol(){
-              try {
-                $sql = 'INSERT INTO USUARIO  VALUES (:Codigo,:Nombre,:Apellido,:Correo,:passCorreo)';
-                $stmt = $this->dbh->prepare($sql);
-                $stmt->bindValue('Codigo', $this->getCode());
-                $stmt->bindValue('Nombre', $this->getnombre());
-                $stmt->bindValue('Apellido', $this->getapellidos());
-                $stmt->bindValue('Correo', $this->getcorreo());
-                $stmt->bindValue('passCorreo', $this->getpassCorreo());
-                
-                     $stmt->execute();
-                    } catch (PDOException $e) {
-                        // Captura y maneja los errores de PDO
-                        die("Error en la consulta: " . $e->getMessage());
-                    }
-                
-        }
+            try {
+               // Verificar si la conexión a la base de datos está establecida
+               if ($this->dbh) {
+                  var_dump($_POST['nombre'], $_POST['apellidos'], $_POST['correo'], $_POST['passCorreo']);
+                  $sql = 'INSERT INTO USUARIO  VALUES (:id, :nombre, :apellido, :correo, :passCorreo)';
+                  
+                  if ($stmt = $this->dbh->prepare($sql)) {
+                    // Ahora puedes usar $stmt
+                    $stmt->bindValue(':id', NULL);
+                    $stmt->bindValue(':nombre', $this->getnombre());
+                    $stmt->bindValue(':apellido', $this->getapellidos());
+                    $stmt->bindValue(':correo', $this->getcorreo());
+                    $stmt->bindValue(':passCorreo', $this->getpassCorreo());
+                    
+                    $stmt->execute();
+                 } else {
+                    die("Error en la preparación de la consulta.");
+                 }
+                 
+               } else {
+                  die("Error: La conexión a la base de datos no está establecida.");
+               }
+            } catch (PDOException $e) {
+               // Captura y maneja los errores de PDO
+               die("Error en la consulta: " . $e->getMessage());
+            }
+         }
+         
+        
+        
         public function createrolAdmin(){
             try {
-                $sql = 'INSERT INTO administrador VALUES (:Code,:Nombre,:Apellido,:Correo,:passCorreo)';
+                $sql = 'INSERT INTO administrador VALUES (:Codigo,:nombre,:Apellido,:correo,:passCorreo)';
                 $stmt = $this->dbh->prepare($sql);
-                $stmt->bindValue('code', $this->getCode());
-                $stmt->bindValue('Nombre', $this->getnombre());
-                $stmt->bindValue('Apellidos', $this->getapellido());
-                $stmt->bindValue('Correo', $this->getcorreo());
+                $stmt->bindValue('Codigo', $this->getCodigo());
+                $stmt->bindValue('nombre', $this->getnombre());
+                $stmt->bindValue('apellidos', $this->getapellido());
+                $stmt->bindValue('correo', $this->getcorreo());
                 $stmt->bindValue('passCorreo', $this->getpassCorreo());
 
                 $stmt->execute();
@@ -114,12 +129,12 @@
         }
         public function createrolVendedor(){
             try {
-                $sql = 'INSERT INTO Vendedor VALUES (:Code,:Nombre,:Apellido,:Correo,:passCorreo)';
+                $sql = 'INSERT INTO Vendedor VALUES (:Codigo,:nombre,:Apellido,:correo,:passCorreo)';
                 $stmt = $this->dbh->prepare($sql);
-                $stmt->bindValue('code', $this->getCode());
-                $stmt->bindValue('Nombre', $this->getnombre());
-                $stmt->bindValue('Apellidos', $this->getapellido());
-                $stmt->bindValue('Correo', $this->getcorreo());
+                $stmt->bindValue('Codigo', $this->getCodigo());
+                $stmt->bindValue('nombre', $this->getnombre());
+                $stmt->bindValue('apellidos', $this->getapellido());
+                $stmt->bindValue('correo', $this->getcorreo());
                 $stmt->bindValue('passCorreo', $this->getpassCorreo());
 
                 $stmt->execute();
@@ -135,7 +150,7 @@
                 $stmt = $this->dbh->query($sql);
                 foreach ($stmt->fetchAll() as $rol) {
                     $rolList[] = new Rol(
-                        $rol['rol_code'],
+                        $rol['rol_Codigo'],
                         $rol['rol_name']
                     );
                 }
@@ -145,15 +160,15 @@
             }
         }
         # CUXX - Obtener el Rol por Id
-        public function getRolById($code){
+        public function getRolById($Codigo){
             try {
-                $sql = "SELECT * FROM ROLES WHERE rol_code=:code";
+                $sql = "SELECT * FROM ROLES WHERE rol_Codigo=:Codigo";
                 $stmt = $this->dbh->prepare($sql);
-                $stmt->bindValue('code', $code);
+                $stmt->bindValue('Codigo', $Codigo);
                 $stmt->execute();
                 $rolDb = $stmt->fetch();
                 $rol = new Rol(
-                    $rolDb['rol_code'],
+                    $rolDb['rol_Codigo'],
                     $rolDb['rol_name']
                 );
                 return $rol;
@@ -165,11 +180,11 @@
         public function rolUpdate(){
             try {
                 $sql = 'UPDATE ROLES SET
-                            rol_code = :code,
+                            rol_Codigo = :Codigo,
                             rol_name = :nombre
-                        WHERE rol_code = :code';
+                        WHERE rol_Codigo = :Codigo';
                 $stmt = $this->dbh->prepare($sql);
-                $stmt->bindValue('code', $this->getRolCode());
+                $stmt->bindValue('Codigo', $this->getRolCodigo());
                 $stmt->bindValue('nombre', $this->getnombre());
                 $stmt->execute();
             } catch (Exception $e) {
@@ -177,11 +192,11 @@
             }
         }
         # CUXX - Eliminar Rol
-        public function rolDelete($code){
+        public function rolDelete($Codigo){
             try {
-                $sql = 'DELETE FROM ROLES WHERE rol_code = :code';
+                $sql = 'DELETE FROM ROLES WHERE rol_Codigo = :Codigo';
                 $stmt = $this->dbh->prepare($sql);
-                $stmt->bindValue('code', $code);
+                $stmt->bindValue('Codigo', $Codigo);
                 $stmt->execute();
             } catch (Exception $e) {
                 die($e->getMessage());

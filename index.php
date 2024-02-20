@@ -1,4 +1,5 @@
 <?php
+require_once "models/users/db1.php";
 require_once "models/users/db.php";
     if (!isset($_REQUEST['c'])) {
         require_once "controller/Menu.php";

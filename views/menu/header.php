@@ -22,7 +22,7 @@
                     <li><a href="#">servicios</a></li>
                     <li><a href="#">productos</a></li>
                     <li><a href="#">contacto</a></li>
-                    <li><a href="?c=Roles" >inicio secion</a></li>
+                    <li><a href="?c=Inicio&a=validar" >inicio secion</a></li>
                     <li><a href="?c=Roles&a=createRol" >registrar</a></li>
                     
                 </ul>
@@ -50,7 +50,7 @@
                                 </thead>
                                 <tbody></tbody>
                             </table>
-                            <a href="#" id="vaciar-carrito " class="btn-3">vaciar carrito</a>
+                            <a href="#" id="vaciar-carrito" class="btn-3">vaciar carrito</a>
                         </div>
                     </li>
                 </ul>

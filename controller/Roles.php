@@ -15,16 +15,18 @@ require_once "models/users/rol.php";
             
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $rol = new Rol(
-                    null,
-                    $_POST['code'],
+                    
+                    
                     $_POST['nombre'],
                     $_POST['apellidos'],
                     $_POST['correo'],
                     $_POST['passCorreo']
                     
-                );                
+                );
+                print_r($_POST);
+                print_r($rol);
                 $rol->createRol();
-                header("Location: ?c=Roles");
+                #header("Location: ?c=Roles");
             }
         }
         public function createRolVendedor(){
