@@ -4,13 +4,16 @@
         <form method="POST" action="">
             <fieldset>
                 <h4 style="padding: 0px;">inicio de secion</h4>
+                <?php if(isset($_GET['error']) && $_GET['error'] == 1): ?>
+                <p style="color: red;">Nombre de usuario o contraseña incorrectos.</p>
+                <?php endif; ?>
                 <input class="controls" type="text" name="correo" id="correo" placeholder="Ingrese su correo" required>
                 <input class="controls" type="password" name="passCorreo" id="passCorreo" placeholder="Ingrese su contraseña" required>
                 <p>Estoy de acuerdo con <a href="#">Términos y Condiciones</a></p>
-                <button class="botons" type="submit" name="registro">Registrar</button>
+                <button class="botons" type="submit" name="registro">Inicio Secion</button>
                 
                
-                <p><a href="http://localhost/pentland/inicio-secion.php">¿Ya tengo cuenta?</a></p>
+               
             </fieldset>
         
         

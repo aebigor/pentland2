@@ -10,6 +10,13 @@ require_once "models/users/db.php";
         require_once "controller/" . $controller . ".php";
         $controller = new $controller;
         $action = isset($_REQUEST['a']) ? $_REQUEST['a'] : 'main';
-        call_user_func(array($controller, $action));
+        if (method_exists($controller, $action)) {
+            // Llamar a la acción solicitada en el controlador
+            $controller->$action();
+        } else {
+            // Acción no válida, manejar el error como desees
+            echo "Error: Acción no válida.";
+        }
     }
+    
 ?>

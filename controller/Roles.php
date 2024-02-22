@@ -26,7 +26,25 @@ require_once "models/users/rol.php";
                 print_r($_POST);
                 print_r($rol);
                 $rol->createRol();
-                #header("Location: ?c=Roles");
+                header("Location: ?c=Inicio&a=validarr");
+            }
+        }
+
+        public function validar(){
+            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+                require_once "views/inicio-secion/header.php";
+                require_once "views/inicio-secion/footer.php";
+            }
+            
+            
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $rol= new rol();
+                
+                $correo = $_POST['correo']; // Suponiendo que el correo electrónico se envía por POST
+                $passCorreo = $_POST['passCorreo']; // Suponiendo que la contraseña se envía por POST
+                $resultadoValidacion = $rol->validar($correo, $passCorreo);
+                echo($passCorreo);
+
             }
         }
         public function createRolVendedor(){

@@ -1,20 +1,19 @@
 <?php session_start();
-require_once "models/users/validar.php";
 
-    class inicio{
-        public function main(){
-            #header("Location:?c=menu");
-         }
+require_once "models/users/usuario.php";
+
+    class Inicio{
+
         // inicioar Rol
-        public function validarr(){
+        public function validar(){
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-                require_once "views/inicio secion/header.php";
-                require_once "views/inicio secion/footer.php";
+                require_once "views/inicio-secion/header.php";
+                require_once "views/inicio-secion/footer.php";
             }
             
             
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                $rol = new Rol(
+                $rol= new usuario(
                     
                 
                     $_POST['correo'],
@@ -23,8 +22,8 @@ require_once "models/users/validar.php";
                 );
                 print_r($_POST);
                 print_r($rol);
-                $rol->validar();
-                #header("Location: ?c=Roles");
+                $rol->validarUsuario();
+                header("Location: ?c=Roles");
             }
         }
     }
