@@ -3,6 +3,7 @@
         // ****** 1er Parte: Clase (POO) *************** //
         // Atributos: Encapsulamiento
         private $dbh;
+        private $conexion;
         protected $Codigo;
         protected $nombre;
         protected $apellidos;
@@ -84,67 +85,73 @@
         public function getpassCorreo(){
             return $this->passCorreo;
         }
+        public function __construct1($conexion) {
+            $this->conexion = $conexion;
+        }
     
 
 
         # CU09 - Registrar Rol
         public function createrol(){
             try {
-               // Verificar si la conexión a la base de datos está establecida
-               if ($this->dbh) {
-                  var_dump($_POST['nombre'], $_POST['apellidos'], $_POST['correo'], $_POST['passCorreo']);
-                  $sql = 'INSERT INTO USUARIO  VALUES (:id, :nombre, :apellido, :correo, :passCorreo)';
-                  
-                  if ($stmt = $this->dbh->prepare($sql)) {
-                    // Ahora puedes usar $stmt
-                    $stmt->bindValue(':id', NULL);
-                    $stmt->bindValue(':nombre', $this->getnombre());
-                    $stmt->bindValue(':apellido', $this->getapellidos());
-                    $stmt->bindValue(':correo', $this->getcorreo());
-                    $stmt->bindValue(':passCorreo', $this->getpassCorreo());
-                    
-                    $stmt->execute();
-                 } else {
-                    die("Error en la preparación de la consulta.");
-                 }
-                 
-               } else {
-                  die("Error: La conexión a la base de datos no está establecida.");
-               }
+                // Verificar si la conexión a la base de datos está establecida
+                if ($this->dbh) {
+                    // Verificar si todos los datos necesarios están presentes
+                    if (isset($_POST['nombre'], $_POST['apellidos'], $_POST['correo'], $_POST['passCorreo'])) {
+                        // Cifrar la contraseña
+                        $passCifrada = password_hash($_POST['passCorreo'], PASSWORD_DEFAULT);
+                        
+                        // Preparar la consulta SQL para insertar un nuevo usuario
+                        $sql = 'INSERT INTO USUARIO (nombre, apellido, correo, passCorreo) VALUES (:nombre, :apellido, :correo, :passCorreo)';
+                        
+                        if ($stmt = $this->dbh->prepare($sql)) {
+                            // Vincular parámetros
+                            $stmt->bindParam(':nombre', $_POST['nombre']);
+                            $stmt->bindParam(':apellido', $_POST['apellidos']);
+                            $stmt->bindParam(':correo', $_POST['correo']);
+                            $stmt->bindParam(':passCorreo', $passCifrada); // Almacenar el hash de la contraseña
+                            
+                            // Ejecutar la consulta
+                            $stmt->execute();
+                            
+                            echo "Usuario creado exitosamente.";
+                        } else {
+                            die("Error en la preparación de la consulta.");
+                        }
+                    } else {
+                        echo "Por favor, proporcione todos los datos necesarios.";
+                    }
+                } else {
+                    die("Error: La conexión a la base de datos no está establecida.");
+                }
             } catch (PDOException $e) {
-               // Captura y maneja los errores de PDO
-               die("Error en la consulta: " . $e->getMessage());
+                // Captura y maneja los errores de PDO
+                die("Error en la consulta: " . $e->getMessage());
             }
-         }
-         
-         public function validar($correo, $passCorreo) {
+        }
+        public function validarRol($correo, $passCorreo) {
             try {
                 // Verificar si la conexión a la base de datos está establecida
                 if ($this->dbh) {
-                    // Preparar la consulta SQL para buscar el correo por correo electrónico
-                    $sql = 'SELECT id, correo, passCorreo FROM usuario WHERE correo = :correo';
+                    // Preparar la consulta SQL para buscar el usuario por correo electrónico y contraseña
+                    $sql = 'SELECT * FROM usuario WHERE correo = :correo AND passCorreo = :passCorreo';
                     
                     if ($stmt = $this->dbh->prepare($sql)) {
                         // Vincular parámetros
                         $stmt->bindParam(':correo', $correo);
+                        $stmt->bindParam(':passCorreo', $passCorreo);
                         
                         // Ejecutar la consulta
                         $stmt->execute();
                         
                         // Obtener el resultado
-                        $correo = $stmt->fetch(PDO::FETCH_ASSOC);
+                        $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
                         
-                        if ($correo) {
-                            // Verificar la contraseña usando password_verify
-                            if (password_verify($passCorreo, $correo['passCorreo'])) {
-                                // Contraseña correcta, devolver los datos del correo
-                                return $correo;
-                            } else {
-                                // Contraseña incorrecta
-                                return false;
-                            }
+                        if ($usuario) {
+                            // Usuario encontrado, devuelve true
+                            return true;
                         } else {
-                            // Usuario no encontrado
+                            // Usuario no encontrado, devuelve false
                             return false;
                         }
                     } else {
@@ -158,8 +165,7 @@
                 die("Error en la consulta: " . $e->getMessage());
             }
         }
-    }
-        
+        }
         #public function createrolAdmin(){
         #    try {
         #        $sql = 'INSERT INTO administrador VALUES (:Codigo,:nombre,:Apellido,:correo,:passCorreo)';

@@ -61,7 +61,11 @@
             <div class="header-txt">
                 <span> bienvenido a nuestra tienda</span>
                 <h1>ofertas especiales</h1>
-                <p> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet nisi libero, impedit tempora doloremque fuga quam porro aspernatur quasi perferendis consequuntur sunt, maxime rem laborum eligendi sint culpa adipisci repellendus?</p>
+                <h4>Paquete de Alimentación Saludable:</h4><br>
+                <li>
+                    <ul>Incluye una selección de alimentos premium para perros o gatos.
+</ul>
+                </li>
                 <div class="botons">
                     <a href="#" class="btn-1">informacion</a>
                     <a href="#" class="btn-1">leer mas</a>
