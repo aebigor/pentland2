@@ -1,36 +1,53 @@
-<?php session_start();
+<?php 
 require_once "models/users/rol.php";
 
     class Roles{
         public function main(){
             header("Location:?c=menu");
         }
-        // Registrar Rol
-        public function createRol(){
+        public function mostrarFormularioRol(){
+
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-                require_once "views/registro/header.php";
-                require_once "views/registro/footer.php";
+                require_once "views/rol/header.php";
             }
-            
-            
-            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                $rol = new Rol(
-                    
-                    
-                    $_POST['nombre'],
-                    $_POST['apellidos'],
-                    $_POST['correo'],
-                    $_POST['passCorreo']
-                    
-                );
-                print_r($_POST);
-                print_r($rol);
-                $rol->createRol();
-                header("Location: ?c=Roles&a=validar");
-            }
+
         }
 
+
+        // Registrar Rol  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Verificar si se recibieron los datos necesarios del formulario
+            public function createRolUsuario(){
+                if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+                    require_once "views/registro/header.php";
+                    require_once "views/registro/footer.php";
+                } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    // Verificar si todos los datos necesarios están presentes
+                    if (isset($_POST['nombre'], $_POST['apellidos'], $_POST['correo'], $_POST['passCorreo'])) {
+                        $usuario = 'usuario'; // Asigna el rol de usuario automáticamente
+                        $rol = new Rol(
+                            $_POST['nombre'],
+                            $_POST['apellidos'],
+                            $_POST['correo'],
+                            $_POST['passCorreo'],
+                            $usuario
+                        );
+                    // Mostrar datos recibidos para verificar
+                    print_r($_POST);
+                    // Mostrar datos de la instancia de Rol para verificar
+                    print_r($rol);
+                    // Intentar crear el rol en la base de datos
+                    try {
+                        $rol->createRol();
+                        //  header("Location: ?c=Roles&a=validar");
+                    } catch (Exception $e) {
+                        echo "Error al crear el rol: " . $e->getMessage();
+                    }
+                } else {
+                    echo "Por favor, complete todos los campos del formulario.";
+                }
+            }}
         public function validar() {
+            session_start();
             // Si la solicitud es GET, simplemente cargamos la vista del formulario de inicio de sesión
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 require_once "views/inicio-secion/header.php";

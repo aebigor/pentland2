@@ -6,7 +6,10 @@
     <title>Registro</title>
     <meta charset="UTF-8">
     
-    <link rel="stylesheet" href="fondo.css" type="text/css">
+    
+    <link rel="stylesheet" href="asset/css/registro.css" type="text/css">
+
+    <link rel="stylesheet" href="asset/css/registro_2.css" type="text/css">
     <style>
 
     </style>

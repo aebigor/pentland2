@@ -23,7 +23,7 @@
                     <li><a href="#">productos</a></li>
                     <li><a href="#">contacto</a></li>
                     <li><a href="?c=Roles&a=validar" >inicio secion</a></li>
-                    <li><a href="?c=Roles&a=createRol" >registrar</a></li>
+                    <li><a href="?c=Roles&a=mostrarFormularioRol" >registrar</a></li>
                     
                 </ul>
                 <div class="botons">

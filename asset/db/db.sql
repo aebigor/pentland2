@@ -1,14 +1,15 @@
     create database pentland;
     use pentland;
+    
+CREATE TABLE usuario (
+    Id int auto_increment primary key,
+    nombre varchar(253) DEFAULT NULL,
+    apellido varchar(50) DEFAULT NULL,
+    correo varchar(255) DEFAULT NULL,
+    passCorreo varchar(255) DEFAULT NULL,
+    rol varchar(50) DEFAULT NULL
+);
 
-    CREATE TABLE usuario (
-        
-        Id int auto_increment primary key,
-        Nombre varchar(253) DEFAULT NULL,
-        Apellido varchar(50) DEFAULT NULL,
-        Correo varchar(255) DEFAULT NULL,
-        Contraseña varchar(255) DEFAULT NULL
-        );
     CREATE TABLE categorias (
     codigo int auto_increment primary key,
     Id int (100) default null,
