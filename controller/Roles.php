@@ -18,8 +18,8 @@ require_once "models/users/rol.php";
             // Verificar si se recibieron los datos necesarios del formulario
             public function createRolUsuario(){
                 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-                    require_once "views/registro/header.php";
-                    require_once "views/registro/footer.php";
+                    require_once "views/usuario/registro/header.php";
+                    require_once "views/usuario/registro/footer.php";
                 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     // Verificar si todos los datos necesarios están presentes
                     if (isset($_POST['nombre'], $_POST['apellidos'], $_POST['correo'], $_POST['passCorreo'])) {
@@ -48,8 +48,8 @@ require_once "models/users/rol.php";
             }}
             public function createRolVendedor(){
                 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-                    require_once "views/registroV/header.php";
-                    require_once "views/registroV/footer.php";
+                    require_once "views/vendedor/registroV/header.php";
+                    require_once "views/vendedor/registroV/footer.php";
                 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     // Verificar si todos los datos necesarios están presentes
                     if (isset($_POST['nombre'], $_POST['apellidos'], $_POST['correo'], $_POST['passCorreo'])) {
@@ -99,7 +99,7 @@ require_once "models/users/rol.php";
         
                 if ($validacion_exitosa) {
                     // Si la validación es exitosa, redirigimos al usuario a la página de menú
-                    header("Location: ?c=menu");
+                    // header("Location: ?c=menu");
                     exit();
                 } else {
                     // Si la validación falla, volvemos a mostrar el formulario de inicio de sesión con un mensaje de error

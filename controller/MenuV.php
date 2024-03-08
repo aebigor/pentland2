@@ -1,10 +1,10 @@
 <?php
-    class menuU{
+    class menuV{
         public function __construct(){}
         public function main(){
-            require_once "views/usuario/menuU/header.php";
-            require_once "views/usuario/menuU/categori.php";
-            require_once "views/usuario/menuU/footer.php";
+            require_once "views/vendedor/menu/header.php";
+            require_once "views/vendedor/menu/categori.php";
+            require_once "views/vendedor/menu/footer.php";
         }
 
         public  function cerrarSecion(){
