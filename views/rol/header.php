@@ -53,7 +53,7 @@
         <h2>Selecciona tu rol</h2>
         <!-- Enlaces en lugar de botones de radio -->
         <a href="/rutaParaAdministrador" class="role-link">Administrador</a>
-        <a href="/rutaParaVendedor" class="role-link">Vendedor</a>
+        <a href="?c=Roles&a=createRolVendedor" class="role-link">Vendedor</a>
         <a href="?c=Roles&a=createRolUsuario" class="role-link">Usuario</a>
     </div>
 </body>

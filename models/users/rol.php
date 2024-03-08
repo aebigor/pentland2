@@ -118,12 +118,13 @@
                             $stmt->bindParam(':apellidos', $_POST['apellidos']);
                             $stmt->bindParam(':correo', $_POST['correo']);
                             $stmt->bindParam(':passCorreo', $passCifrada);
-                            $stmt->bindParam(':rol', $_POST['usuario']);
-                            echo($_POST);
+                            $stmt->bindParam(':rol', $_POST['usuario'
+                        ]);
+                            #echo($_POST);
                             // Ejecutar la consulta
                             $stmt->execute();
                             
-                            echo "Usuario creado exitosamente.";
+                            #echo "Usuario creado exitosamente.";
                         } else {
                             die("Error en la preparación de la consulta.");
                         }
@@ -145,125 +146,39 @@
                 if ($this->dbh) {
                     // Preparar la consulta SQL para buscar el usuario por correo electrónico y contraseña cifrada
                     $sql = 'SELECT * FROM usuario WHERE correo = :correo';
-                    
+        
                     if ($stmt = $this->dbh->prepare($sql)) {
                         // Vincular parámetros
                         $stmt->bindParam(':correo', $correo);
-                        
+        
                         // Ejecutar la consulta
                         $stmt->execute();
-                        
+        
                         // Obtener el resultado
                         $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
-                        
+        
                         if ($usuario && password_verify($passCorreo, $usuario['passCorreo'])) {
-                            // Contraseña válida, devuelve true
-                            return true;
-                        } else {
-                            // Contraseña no válida o usuario no encontrado, devuelve false
-                            return false;
-                        }
-                    } else {
-                        die("Error en la preparación de la consulta.");
-                    }
-                } else {
-                    die("Error: La conexión a la base de datos no está establecida.");
+                            // Contraseña válida, redirecciona según el rol
+                            if($usuario['rol'] === 'Vendedor') {
+                                header("Location: ?c=menuU");
+                                exit();
+                            } else if ($usuario['rol'] === 'Usuario'){
+                                header("Location: ?c=menu");
+                                exit();
+                            } else {
+                                header("Location: ?c=menu");
+                                exit();
+                            }
+                        }   
+                    } 
                 }
             } catch (PDOException $e) {
                 // Captura y maneja los errores de PDO
                 die("Error en la consulta: " . $e->getMessage());
             }
         }
+
     }
-        #public function createrolAdmin(){
-        #    try {
-        #        $sql = 'INSERT INTO administrador VALUES (:Codigo,:nombre,:Apellido,:correo,:passCorreo)';
-        #        $stmt = $this->dbh->prepare($sql);
-        #        $stmt->bindValue('Codigo', $this->getCodigo());
-        #        $stmt->bindValue('nombre', $this->getnombre());
-        #        $stmt->bindValue('apellidos', $this->getapellido());
-        #        $stmt->bindValue('correo', $this->getcorreo());
-        #        $stmt->bindValue('passCorreo', $this->getpassCorreo());
-#
-        #        $stmt->execute();
-        #    } catch (Exception $e) {
-        #        die($e->getMessage());
-        #    }
-        #}
-        #public function createrolVendedor(){
-        #    try {
-        #        $sql = 'INSERT INTO Vendedor VALUES (:Codigo,:nombre,:Apellido,:correo,:passCorreo)';
-        #        $stmt = $this->dbh->prepare($sql);
-        #        $stmt->bindValue('Codigo', $this->getCodigo());
-        #        $stmt->bindValue('nombre', $this->getnombre());
-        #        $stmt->bindValue('apellidos', $this->getapellido());
-        #        $stmt->bindValue('correo', $this->getcorreo());
-        #        $stmt->bindValue('passCorreo', $this->getpassCorreo());
-#
-        #        $stmt->execute();
-        #    } catch (Exception $e) {
-        #        die($e->getMessage());
-        #    }
-        #}
-        ## CUXX - Consultar Roles
-        #public function rolRead(){
-        #    try {
-        #        $rolList = [];
-        #        $sql = 'SELECT * FROM ROLES';
-        #        $stmt = $this->dbh->query($sql);
-        #        foreach ($stmt->fetchAll() as $rol) {
-        #            $rolList[] = new Rol(
-        #                $rol['rol_Codigo'],
-        #                $rol['rol_name']
-        #            );
-        #        }
-        #        return $rolList;
-        #    } catch (Exception $e) {
-        #        die($e->getMessage());
-        #    }
-        #}
-        ## CUXX - Obtener el Rol por Id
-        #public function getRolById($Codigo){
-        #    try {
-        #        $sql = "SELECT * FROM ROLES WHERE rol_Codigo=:Codigo";
-        #        $stmt = $this->dbh->prepare($sql);
-        #        $stmt->bindValue('Codigo', $Codigo);
-        #        $stmt->execute();
-        #        $rolDb = $stmt->fetch();
-        #        $rol = new Rol(
-        #            $rolDb['rol_Codigo'],
-        #            $rolDb['rol_name']
-        #        );
-        #        return $rol;
-        #    } catch (Exception $e) {
-        #        die($e->getMessage());
-        #    }
-        #}
-        ## CUXX - Actualizar Rol
-        #public function rolUpdate(){
-        #    try {
-        #        $sql = 'UPDATE ROLES SET
-        #                    rol_Codigo = :Codigo,
-        #                    rol_name = :nombre
-        #                WHERE rol_Codigo = :Codigo';
-        #        $stmt = $this->dbh->prepare($sql);
-        #        $stmt->bindValue('Codigo', $this->getRolCodigo());
-        #        $stmt->bindValue('nombre', $this->getnombre());
-        #        $stmt->execute();
-        #    } catch (Exception $e) {
-        #        die($e->getMessage());
-        #    }
-        #}
-        ## CUXX - Eliminar Rol
-        #public function rolDelete($Codigo){
-        #    try {
-        #        $sql = 'DELETE FROM ROLES WHERE rol_Codigo = :Codigo';
-        #        $stmt = $this->dbh->prepare($sql);
-        #        $stmt->bindValue('Codigo', $Codigo);
-        #        $stmt->execute();
-        #    } catch (Exception $e) {
-        #        die($e->getMessage());
-        #    }
-        #}
+
     
 ?>

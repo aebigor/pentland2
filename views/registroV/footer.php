@@ -1,7 +1,7 @@
 
 <body>
     <div class="form-register">
-        <form method="POST" action="registro.php">
+        <form method="POST" action="">
             <fieldset>
                 <h4 style="padding: 0px;">Registro Vendedor</h4>
                 <input class="controls" type="text" name="nombre" id="nombre" placeholder="Ingrese su nombre" required>

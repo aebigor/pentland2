@@ -4,7 +4,7 @@ require_once "models/users/rol.php";
     class Roles{
         public function main(){
             header("Location:?c=menu");
-        }
+          }
         public function mostrarFormularioRol(){
 
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -23,13 +23,13 @@ require_once "models/users/rol.php";
                 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     // Verificar si todos los datos necesarios están presentes
                     if (isset($_POST['nombre'], $_POST['apellidos'], $_POST['correo'], $_POST['passCorreo'])) {
-                        $usuario = 'usuario'; // Asigna el rol de usuario automáticamente
+                        $usuario = 'Usuario'; // Asigna el rol de usuario automáticamente
                         $rol = new Rol(
                             $_POST['nombre'],
                             $_POST['apellidos'],
                             $_POST['correo'],
                             $_POST['passCorreo'],
-                            $usuario
+                            $_POST['usuario'] = $usuario
                         );
                     // Mostrar datos recibidos para verificar
                     print_r($_POST);
@@ -38,7 +38,37 @@ require_once "models/users/rol.php";
                     // Intentar crear el rol en la base de datos
                     try {
                         $rol->createRol();
-                        //  header("Location: ?c=Roles&a=validar");
+                         header("Location: ?c=Roles&a=validar");
+                    } catch (Exception $e) {
+                        echo "Error al crear el rol: " . $e->getMessage();
+                    }
+                } else {
+                    echo "Por favor, complete todos los campos del formulario.";
+                }
+            }}
+            public function createRolVendedor(){
+                if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+                    require_once "views/registroV/header.php";
+                    require_once "views/registroV/footer.php";
+                } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    // Verificar si todos los datos necesarios están presentes
+                    if (isset($_POST['nombre'], $_POST['apellidos'], $_POST['correo'], $_POST['passCorreo'])) {
+                        $usuario = 'Vendedor'; // Asigna el rol de usuario automáticamente
+                        $rol = new Rol(
+                            $_POST['nombre'],
+                            $_POST['apellidos'],
+                            $_POST['correo'],
+                            $_POST['passCorreo'],
+                            $_POST['usuario'] = $usuario
+                        );
+                    // Mostrar datos recibidos para verificar
+                    print_r($_POST);
+                    // Mostrar datos de la instancia de Rol para verificar
+                    print_r($rol);
+                    // Intentar crear el rol en la base de datos
+                    try {
+                        $rol->createRol();
+                         header("Location: ?c=Roles&a=validar");
                     } catch (Exception $e) {
                         echo "Error al crear el rol: " . $e->getMessage();
                     }
@@ -82,27 +112,6 @@ require_once "models/users/rol.php";
         }
         
         
-        public function createRolVendedor(){
-            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-                require_once "views/registroV/header.php";
-                require_once "views/registroV/footer.php";
-            }
-            
-            
-            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                $rol = new Rol(
-                    null,
-                    $_POST['code'],
-                    $_POST['nombre'],
-                    $_POST['apellido'],
-                    $_POST['usuario'],
-                    $_POST['password']
-                    
-                );                
-                $rol->rolCreate();
-                header("Location: Menu.php");
-            }
-        }
         public function createRolAdministrador(){
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 require_once "views/registro/header.php";
