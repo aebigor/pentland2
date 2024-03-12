@@ -10,7 +10,11 @@
         protected $correo;
         protected $passCorreo;
         protected $usuario;
-        
+        protected $imagen;
+        protected $precio;
+        protected $descripcion;
+        protected $nombreP;
+        protected $cantidad;
         // Métodos
         # Sobrecarga de Constructores
         public function __construct(){
@@ -25,7 +29,7 @@
                 die($e->getMessage());
             }
         }
-        public function __construct5( $nombre , $apellidos , $correo , $passCorreo,$usuario){
+        public function __constructt5( $nombre , $apellidos , $correo , $passCorreo,$usuario){
         
             $this->nombre = $nombre;
             $this->apellidos = $apellidos;
@@ -42,6 +46,15 @@
         
             // Resto del código...
         }
+        public function __construct5($nombreP , $descripcion , $precio , $cantidad ,$imagen)
+        {
+            $this->nombreP = $nombreP;
+            $this->descripcion = $descripcion;
+            $this->precio = $precio;
+            $this->cantidad = $cantidad;
+            $this->imagen = $imagen;
+        }
+        
    
         // Métodos set() y get()
         # Codigo: set()
@@ -87,13 +100,43 @@
         public function getpassCorreo(){
             return $this->passCorreo;
         }
-        public function setusuario($usuario){
-            $this->usuario = $usuario;
+        public function setnombreP($nombreP){
+            $this->nombreP = $nombreP;
         }
         #usuario: get()
-        public function getusuario(){
-            return $this->usuario;
+        public function getnombreP(){
+            return $this->nombreP;
         }
+        public function setdescripcion($descripcion){
+            $this->descripcion = $descripcion;
+        }
+        #descripcion: get()
+        public function getdescripcion(){
+            return $this->descripcion;
+        }
+        public function setprecio($precio){
+            $this->precio = $precio;
+        }
+        #precio: get()
+        public function getprecio(){
+            return $this->precio;
+        }
+        public function setcantidad($cantidad){
+            $this->cantidad = $cantidad;
+        }
+        #cantidad: get()
+        public function getcantidad(){
+            return $this->cantidad;
+        }
+        public function setimagen($imagen){
+            $this->imagen = $imagen;
+        }
+        #imagen: get()
+        public function getimagen(){
+            return $this->imagen;
+        }
+      
+        
 
     
 
@@ -178,7 +221,64 @@
             }
         }
 
+    
+        public function createProduct($nombre, $descripcion, $precio, $cantidad) {
+            try {
+                // Verificar si la conexión a la base de datos está establecida
+                if ($this->dbh) {
+                    // Verificar si todos los datos necesarios están presentes
+                    if (isset($nombre, $descripcion, $precio, $cantidad)) {
+                        // Verificar si se ha subido una imagen
+                        if(isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
+                            $imagen_temporal = $_FILES['imagen']['tmp_name'];
+                            $imagen_nombre = $_FILES['imagen']['name'];
+                            $imagen_tipo = $_FILES['imagen']['type'];
+                            $imagen_tamano = $_FILES['imagen']['size'];
+                            
+                            // Validar el tipo de archivo (puedes agregar más tipos según tus necesidades)
+                            $permitidos = array("image/jpeg", "image/png", "image/gif");
+                            if(!in_array($imagen_tipo, $permitidos)) {
+                                return false; // Tipo de archivo no permitido
+                            }
+                            
+                            // Mover el archivo a una ubicación permanente
+                            $ruta_imagen = "img" . $imagen_nombre;
+                            if(move_uploaded_file($imagen_temporal, $ruta_imagen)) {
+                                // Preparar la consulta SQL para insertar un nuevo producto
+                                $sql = 'INSERT INTO productos (nombre, descripcion, precio, cantidad, imagen) VALUES (:nombre, :descripcion, :precio, :cantidad, :imagen)';
+                                
+                                if ($stmt = $this->dbh->prepare($sql)) {
+                                    // Vincular parámetros
+                                    $stmt->bindParam(':nombre', $nombre);
+                                    $stmt->bindParam(':descripcion', $descripcion);
+                                    $stmt->bindParam(':precio', $precio);
+                                    $stmt->bindParam(':cantidad', $cantidad);
+                                    $stmt->bindParam(':imagen', $ruta_imagen); // Guardamos la ruta de la imagen en la base de datos
+                                    
+                                    // Ejecutar la consulta
+                                    $stmt->execute();
+                                    
+                                    return true; // Indicar éxito en la inserción
+                                } else {
+                                    return false; // Error en la preparación de la consulta
+                                }
+                            } else {
+                                return false; // Error al mover el archivo
+                            }
+                        } else {
+                            return false; // No se ha subido ninguna imagen
+                        }
+                    } else {
+                        return false; // Faltan datos necesarios
+                    }
+                } else {
+                    return false; // Error en la conexión a la base de datos
+                }
+            } catch (PDOException $e) {
+                // Captura y maneja los errores de PDO
+                die("Error en la consulta: " . $e->getMessage());
+            }
+        }
     }
-
     
 ?>

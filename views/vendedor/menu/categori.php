@@ -1,48 +1,49 @@
-<!-- Content -->
-<div class="full-box tile-container">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Subir Producto</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
 
-<a href="client-new.html" class="tile">
-    <div class="tile-tittle">Clientes</div>
-    <div class="tile-icon">
-        <i class="fas fa-users fa-fw"></i>
-        <p>5 Registrados</p>
+    <div class="contenedor">
+    <div class="formulario-contenedor">
+        <form  method="POST" action="">
+            <fieldset id="uploadProductForm" enctype="multipart/form-data">
+                <h4 style="padding: 0px;">Registro de producto</h4>
+                Nombre del producto: <input type="text" name="nombreP" id="descriptionInput"><br>
+                Descripción: <input type="text" name="descripcion" id="descriptionInput"><br>
+                Precio: <input type="number" name="precio" id="priceInput" step="0.01"><br>
+                Cantidad: <input type="number" name="cantidad" id="quantityInput"><br>
+                Imagen: <input type="file" name="imagen" id="imageInput" accept="image/*"><br>
+                <button type="submit">Subir Producto</button>
+               
+            </fieldset>
+        
+        
+        </form>
+
     </div>
-</a>
+    <div class="image-preview" id="imagePreview"></div>
 
-<a href="item-list.html" class="tile">
-    <div class="tile-tittle">Items</div>
-    <div class="tile-icon">
-        <i class="fas fa-pallet fa-fw"></i>
-        <p>9 Registrados</p>
     </div>
-</a>
 
-<a href="reservation-list.html" class="tile">
-    <div class="tile-tittle">Prestamos</div>
-    <div class="tile-icon">
-        <i class="fas fa-file-invoice-dollar fa-fw"></i>
-        <p>10 Registrados</p>
-    </div>
-</a>
+<script>
+document.getElementById('imageInput').addEventListener('change', function(event) {
+    const [file] = event.target.files;
+    const previewContainer = document.getElementById('imagePreview');
+    if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            previewContainer.innerHTML = `<img src="${e.target.result}" alt="Vista previa de la imagen">`;
+        };
+        reader.readAsDataURL(file);
+    } else {
+        previewContainer.innerHTML = '';
+    }
+});
+</script>
 
-<a href="user-list.html" class="tile">
-    <div class="tile-tittle">Usuarios</div>
-    <div class="tile-icon">
-        <i class="fas fa-user-secret fa-fw"></i>
-        <p>50 Registrados</p>
-    </div>
-</a>
-
-<a href="company.html" class="tile">
-    <div class="tile-tittle">Empresa</div>
-    <div class="tile-icon">
-        <i class="fas fa-store-alt fa-fw"></i>
-        <p>1 Registrada</p>
-    </div>
-</a>
-
-</div>
-
-
-</section>
-</main>
+</body>
+</html>

@@ -9,6 +9,7 @@
 	<!-- Normalize V8.0.1 -->
 	<link rel="stylesheet" href="asset/css/normalize.css">
 
+	<link rel="stylesheet" href="asset/css/productos.css">
 	<!-- Bootstrap V4.3 -->
 	<link rel="stylesheet" href="asset/css/bootstrap.min.css">
 
@@ -51,36 +52,21 @@
 				<div class="full-box nav-lateral-bar"></div>
 				<nav class="full-box nav-lateral-menu">
 					<ul>
-						<li>
-							<a href="home.html"><i class="fab fa-dashcube fa-fw"></i> &nbsp; Dashboard</a>
-						</li>
+						
 
 						<li>
-							<a href="#" class="nav-btn-submenu"><i class="fas  fas fa-users fa-fw"></i> &nbsp; Roles <i class="fas fa-chevron-down"></i></a>
+							<a href="#" class="nav-btn-submenu"><i class="fas  fas fa-users fa-fw"></i> &nbsp; registrar venta <i class="fas fa-chevron-down"></i></a>
 							<ul>
 								<li>
-									<a href="?c=Roles&a=createRol"><i class="fas fa-plus fa-fw"></i> &nbsp; Nuevo Rol</a>
+									<a href="?c=Roles&a=create"><i class="fas fa-plus fa-fw"></i> &nbsp; ver productos</a>
 								</li>
 								<li>
-									<a href="?c=Roles&a=readRol"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de Roles</a>
+									<a href="?c=Roles&a=createProduct"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Registrar producto</a>
 								</li>
 							</ul>
 						</li>
 
-						<li>
-							<a href="#" class="nav-btn-submenu"><i class="fas  fa-user-secret fa-fw"></i> &nbsp; Usuarios <i class="fas fa-chevron-down"></i></a>
-							<ul>
-								<li>
-									<a href="user-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; Nuevo usuario</a>
-								</li>
-								<li>
-									<a href="user-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de usuarios</a>
-								</li>
-								<li>
-									<a href="user-search.html"><i class="fas fa-search fa-fw"></i> &nbsp; Buscar usuario</a>
-								</li>
-							</ul>
-						</li>
+						
 					</ul>
 				</nav>
 			</div>
@@ -100,12 +86,4 @@
 				</a>
 			</nav>
 
-			<!-- Page header -->
-			<div class="full-box page-header">
-				<h3 class="text-left">
-					<i class="fab fa-dashcube fa-fw"></i> &nbsp; DASHBOARD
-				</h3>
-				<p class="text-justify">
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit nostrum rerum animi natus beatae ex. Culpa blanditiis tempore amet alias placeat, obcaecati quaerat ullam, sunt est, odio aut veniam ratione.
-				</p>
-			</div>
+		

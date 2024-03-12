@@ -99,7 +99,7 @@ require_once "models/users/rol.php";
         
                 if ($validacion_exitosa) {
                     // Si la validación es exitosa, redirigimos al usuario a la página de menú
-                    // header("Location: ?c=menu");
+                     header("Location: ?c=menuU");
                     exit();
                 } else {
                     // Si la validación falla, volvemos a mostrar el formulario de inicio de sesión con un mensaje de error
@@ -133,41 +133,49 @@ require_once "models/users/rol.php";
                 header("Location: Menu.php");
             }
         }
-        // Consultar roles
-        public function readRol(){
-            $roles = new Rol;
-            $roles = $roles->rolRead();
-            require_once "views/menu/header.php";
-            require_once "views/menu/categori.php";
-            require_once "views/menu/footer.php";            
-        }
-        // Actualizar Rol
-        public function updateRol(){
+
+
+        public function createProduct() {
+            session_start();
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-                // 1ra Parte: Obtener el registro
-                $rol = new Rol;
-                $rol = $rol->getRolById($_GET['idRol']);
-                require_once "views/roles/admin/header.view.php";
-                require_once "views/modules/mod01_users/rol_update.view.php";                
-                require_once "views/roles/admin/footer.view.php";
-            }
-            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                // 2da Parte: Actualizar el registro
+                require_once "views/vendedor/menu/header.php";
+                require_once "views/vendedor/menu/categori.php";
+                require_once "views/vendedor/menu/footer.php";
+        } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Verificar si todos los datos necesarios están presentes
+            if (isset($_POST['descripcion'], $_POST['precio'], $_POST['cantidad'], $_POST['imagen'])) {
+                 // Asigna el rol de usuario automáticamente
                 $rol = new Rol(
-                    $_POST['rolCode'],
-                    $_POST['rolName']
+                    $_POST['descripcion'],
+                    $_POST['precio'],
+                    $_POST['cantidad'],
+                    $_POST['imagen']
+                    
                 );
-                print_r($rol);
-                $rol->rolUpdate();
-                header("Location:?c=Roles&a=readRol");
+            // Mostrar datos recibidos para verificar
+            print_r($_POST);
+            // Mostrar datos de la instancia de Rol para verificar
+            print_r($rol);
+            // Intentar crear el rol en la base de datos
+            try {
+                $rol->createProduct($nombre, $descripcion, $precio, $cantidad);
+                header("Location: ?c=menuV");  
+            } catch (Exception $e) {
+                echo "Error al crear el rol: " . $e->getMessage();
             }
+        } else {
+            echo "Por favor, complete todos los campos del formulario.";
         }
-        // Eliminar Rol
-        public function deleteRol(){
-            $rol = new Rol;
-            // $rol->rolDelete("3");
-        }
+    }}
+    
+    // Uso del controlador
+   
+    
+    // Suponiendo que $_POST y $_FILES contienen los datos del formulario
+
+        // Consultar roles
+
 
     }
-
+        
 ?>

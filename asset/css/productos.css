@@ -1,0 +1,68 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e0f7fa; /* Fondo celeste */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.contenedor {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px; /* Espacio entre el formulario y la vista previa */
+}
+
+.formulario-contenedor form {
+    background-color: #b2ebf2;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 300px; /* Ancho fijo para el formulario */
+}
+
+input[type="text"], input[type="number"], input[type="file"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #cfd8dc;
+    display: block;
+}
+
+button {
+    background-color: #4dd0e1;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #26c6da;
+}
+
+h2 {
+    color: #006064;
+    text-align: center;
+}
+
+.image-preview {
+    width: 300px; /* Hacemos que la vista previa tenga el mismo ancho que el formulario */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Previene que la imagen sobrepase el contenedor */
+    border-radius: 8px; /* Opcional: para mantener consistencia con el estilo del formulario */
+}
+
+.image-preview img {
+    width: 100%; /* Hace que la imagen se ajuste al contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
+}

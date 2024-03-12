@@ -15,10 +15,11 @@ CREATE TABLE usuario (
     rol_id INT,
     FOREIGN KEY (rol_id) REFERENCES Roles(id)
 );
-CREATE TABLE Categorias (
+CREATE TABLE productos (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(255) NOT NULL,
-    descripcion TEXT,
-    imagen VARCHAR(255), 
-    precio DECIMAL(10, 2) 
+    nombre VARCHAR(100) NOT NULL,
+    descripcion TEXT NOT NULL,
+    precio DECIMAL(10, 2) NOT NULL,
+    cantidad INT NOT NULL,
+    imagen VARCHAR(255) NOT NULL
 );
