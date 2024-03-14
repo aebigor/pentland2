@@ -58,7 +58,7 @@
 							<a href="#" class="nav-btn-submenu"><i class="fas  fas fa-users fa-fw"></i> &nbsp; registrar venta <i class="fas fa-chevron-down"></i></a>
 							<ul>
 								<li>
-									<a href="?c=Roles&a=create"><i class="fas fa-plus fa-fw"></i> &nbsp; ver productos</a>
+									<a href="?c=Roles&a=verProduct"><i class="fas fa-plus fa-fw"></i> &nbsp; ver productos</a>
 								</li>
 								<li>
 									<a href="?c=Roles&a=createProduct"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Registrar producto</a>

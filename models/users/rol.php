@@ -10,11 +10,12 @@
         protected $correo;
         protected $passCorreo;
         protected $usuario;
-        protected $imagen;
+        protected $imagenNombre;
         protected $precio;
         protected $descripcion;
         protected $nombreP;
         protected $cantidad;
+        protected $categoria;
         // Métodos
         # Sobrecarga de Constructores
         public function __construct(){
@@ -29,7 +30,7 @@
                 die($e->getMessage());
             }
         }
-        public function __constructt5( $nombre , $apellidos , $correo , $passCorreo,$usuario){
+        public function __construct5( $nombre , $apellidos , $correo , $passCorreo,$usuario){
         
             $this->nombre = $nombre;
             $this->apellidos = $apellidos;
@@ -46,13 +47,14 @@
         
             // Resto del código...
         }
-        public function __construct5($nombreP , $descripcion , $precio , $cantidad ,$imagen)
+        public function __construct6($nombreP , $descripcion , $precio , $cantidad ,$imagenNombre, $categoria)
         {
             $this->nombreP = $nombreP;
             $this->descripcion = $descripcion;
             $this->precio = $precio;
             $this->cantidad = $cantidad;
-            $this->imagen = $imagen;
+            $this->imagenNombre = $imagenNombre;
+            $this->categoria = $categoria;
         }
         
    
@@ -128,12 +130,19 @@
         public function getcantidad(){
             return $this->cantidad;
         }
-        public function setimagen($imagen){
-            $this->imagen = $imagen;
+        public function setimagen($imagenNombre){
+            $this->imagenNombre = $imagenNombre;
         }
-        #imagen: get()
+        #imagenNombre: get()
         public function getimagen(){
-            return $this->imagen;
+            return $this->imagenNombre;
+        }
+        public function setcategoria($categoria){
+            $this->categoria = $categoria;
+        }
+        #categoria: get()
+        public function getcategoria(){
+            return $this->categoria;
         }
       
         
@@ -222,63 +231,112 @@
         }
 
     
-        public function createProduct($nombre, $descripcion, $precio, $cantidad) {
+        public function createProductos() {
             try {
-                // Verificar si la conexión a la base de datos está establecida
-                if ($this->dbh) {
-                    // Verificar si todos los datos necesarios están presentes
-                    if (isset($nombre, $descripcion, $precio, $cantidad)) {
-                        // Verificar si se ha subido una imagen
-                        if(isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
-                            $imagen_temporal = $_FILES['imagen']['tmp_name'];
-                            $imagen_nombre = $_FILES['imagen']['name'];
-                            $imagen_tipo = $_FILES['imagen']['type'];
-                            $imagen_tamano = $_FILES['imagen']['size'];
+                // Verificar si todos los datos necesarios están presentes
+                if (isset($_POST['nombreP'], $_POST['descripcion'], $_POST['precio'], $_POST['cantidad'], $_POST['categoria'], $_FILES['imagenNombre'])) {
+                    // Inicializar un arreglo para almacenar errores
+                    $errors = array();
+                    
+                    // Validar la imagenNombre
+                    if (empty($_FILES['imagenNombre']['name'])) {
+                        $errors['imagenNombre'] = 'La imagenNombre no se ha subido correctamente.';
+                    } else {
+                        // Obtener la extensión de la imagenNombre
+                        $extension = pathinfo($_FILES['imagenNombre']['name'], PATHINFO_EXTENSION);
+                        $allowedExtensions = array('jpg', 'jpeg', 'png', 'gif');
+                        
+                        // Verificar si la extensión es válida
+                        if (!in_array($extension, $allowedExtensions)) {
+                            $errors['imagenNombre'] = 'La imagenNombre debe tener una extensión válida.';
+                        }
+                    }
+                    
+                    // Si no hay errores en la validación de la imagenNombre, almacenarla
+                    if (empty($errors)) {
+                        $imagenNombre = uniqid() . '.' . $extension;
+                        $target_dir = "img/";
+                        $target_file = $target_dir . $imagenNombre;
+                        
+                        // Mover la imagenNombre al directorio deseado
+                        if (move_uploaded_file($_FILES['imagenNombre']['tmp_name'], $target_file)) {
+
+                            // Preparar la consulta SQL para insertar un nuevo producto
+                            $sql = 'INSERT INTO productos (nombre, descripcion, precio, cantidad, categoria, imagenNombre) VALUES (:nombre, :descripcion, :precio, :cantidad, :categoria, :imagenNombre)';
                             
-                            // Validar el tipo de archivo (puedes agregar más tipos según tus necesidades)
-                            $permitidos = array("image/jpeg", "image/png", "image/gif");
-                            if(!in_array($imagen_tipo, $permitidos)) {
-                                return false; // Tipo de archivo no permitido
-                            }
+                            // Preparar y ejecutar la consulta
+                            $stmt = $this->dbh->prepare($sql);
+                            $stmt->bindParam(':nombre', $_POST['nombreP']);
+                            $stmt->bindParam(':descripcion', $_POST['descripcion']);
+                            $stmt->bindParam(':precio', $_POST['precio']);
+                            $stmt->bindParam(':cantidad', $_POST['cantidad']);
+                            $stmt->bindParam(':categoria', $_POST['categoria']);
+                            $stmt->bindParam(':imagenNombre', $imagenNombre); // Guardamos el nombre de la imagenNombre en la base de datos
                             
-                            // Mover el archivo a una ubicación permanente
-                            $ruta_imagen = "img" . $imagen_nombre;
-                            if(move_uploaded_file($imagen_temporal, $ruta_imagen)) {
-                                // Preparar la consulta SQL para insertar un nuevo producto
-                                $sql = 'INSERT INTO productos (nombre, descripcion, precio, cantidad, imagen) VALUES (:nombre, :descripcion, :precio, :cantidad, :imagen)';
-                                
-                                if ($stmt = $this->dbh->prepare($sql)) {
-                                    // Vincular parámetros
-                                    $stmt->bindParam(':nombre', $nombre);
-                                    $stmt->bindParam(':descripcion', $descripcion);
-                                    $stmt->bindParam(':precio', $precio);
-                                    $stmt->bindParam(':cantidad', $cantidad);
-                                    $stmt->bindParam(':imagen', $ruta_imagen); // Guardamos la ruta de la imagen en la base de datos
-                                    
-                                    // Ejecutar la consulta
-                                    $stmt->execute();
-                                    
-                                    return true; // Indicar éxito en la inserción
-                                } else {
-                                    return false; // Error en la preparación de la consulta
-                                }
-                            } else {
-                                return false; // Error al mover el archivo
-                            }
+                            $stmt->execute();
+                            
+                            // Redireccionar después de la inserción del producto
+                            header("Location: ?c=menuV");
+                            exit(); // Terminar el script para evitar la ejecución adicional de código
                         } else {
-                            return false; // No se ha subido ninguna imagen
+                            // Si falla la carga de la imagenNombre, mostrar un mensaje de error
+                            echo '<p>Error al subir la imagenNombre.</p>';
                         }
                     } else {
-                        return false; // Faltan datos necesarios
+                        // Mostrar errores de validación de la imagenNombre
+                        foreach ($errors as $error) {
+                            echo '<p>' . $error . '</p>';
+                        }
                     }
                 } else {
-                    return false; // Error en la conexión a la base de datos
+                    // Mostrar un mensaje de error si faltan datos necesarios en el formulario
+                    echo "Por favor, complete todos los campos del formulario.";
                 }
             } catch (PDOException $e) {
-                // Captura y maneja los errores de PDO
+                // Capturar y manejar los errores de PDO
                 die("Error en la consulta: " . $e->getMessage());
             }
         }
-    }
-    
+        
+        
+
+        public function productRead(){
+            try {
+                $rolList = [];
+                $sql = 'SELECT * FROM productos';
+                $stmt = $this->dbh->query($sql);                
+                foreach ($stmt->fetchAll() as $rol) {
+                    $rolList[] = new Rol(
+                        $rol['nameP'],
+                        $rol['descripcion']
+                    );
+                }                
+                return $rolList;
+            } catch (Exception $e) {
+                die($e->getMessage());
+            }
+        }
+                                } 
+        
+        //                                 return false; // Error en la preparación de la consulta
+        //                             }
+        //                         } else {
+        //                             return false; // Error al mover el archivo
+        //                         }
+        //                     } else {
+        //                         return false; // No se ha subido ninguna imagenNombre
+        //                     }
+        //                 } else {
+        //                     return false; // Faltan datos necesarios
+        //                 }
+        //             } else {
+        //                 return false; // Error en la conexión a la base de datos
+        //             }
+        //         } catch (PDOException $e) {
+        //             // Captura y maneja los errores de PDO
+        //             die("Error en la consulta: " . $e->getMessage());
+        //         }
+        //     }
+        // }}
+                                
 ?>

@@ -129,45 +129,85 @@ require_once "models/users/rol.php";
                     $_POST['password']
                     
                 );                
-                $rol->rolCreate();
+                // $rol->rolCreate();
                 header("Location: Menu.php");
             }
         }
 
-
         public function createProduct() {
             session_start();
+        
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 require_once "views/vendedor/menu/header.php";
                 require_once "views/vendedor/menu/categori.php";
                 require_once "views/vendedor/menu/footer.php";
-        } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // Verificar si todos los datos necesarios están presentes
-            if (isset($_POST['descripcion'], $_POST['precio'], $_POST['cantidad'], $_POST['imagen'])) {
-                 // Asigna el rol de usuario automáticamente
-                $rol = new Rol(
-                    $_POST['descripcion'],
-                    $_POST['precio'],
-                    $_POST['cantidad'],
-                    $_POST['imagen']
-                    
-                );
-            // Mostrar datos recibidos para verificar
-            print_r($_POST);
-            // Mostrar datos de la instancia de Rol para verificar
-            print_r($rol);
-            // Intentar crear el rol en la base de datos
-            try {
-                $rol->createProduct($nombre, $descripcion, $precio, $cantidad);
-                header("Location: ?c=menuV");  
-            } catch (Exception $e) {
-                echo "Error al crear el rol: " . $e->getMessage();
             }
-        } else {
-            echo "Por favor, complete todos los campos del formulario.";
-        }
-    }}
+        
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                // Verificar si todos los datos necesarios están presentes   
+                if (isset($_POST['nombreP'],$_POST['descripcion'],$_POST['precio'],$_POST['cantidad'],$_FILES['imagen'])) {
+                // Validar la imagen
+                if (empty($_FILES['imagen']['name'])) {
+                    $errors['imagen'] = 'La imagen no se ha subido correctamente.';
+                }
+
+                $allowedExtensions = array('jpg', 'jpeg', 'png', 'gif');
+                $extension = pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
+                if (!in_array($extension, $allowedExtensions)) {
+                    $errors['imagen'] = 'La imagen debe tener una extensión válida.';
+                }
+
+                // Almacenar la imagen
+                if (!isset($errors)) {
+                    $imagenNombre = uniqid() . '.' . $extension;
+                    $target_dir = "img/";
+                    $target_file = $target_dir . $imagenNombre;
+
+                        move_uploaded_file($_FILES['imagen']['tmp_name'], $target_file);
+        
+                        // Crear un nuevo objeto de la clase Rol con los datos del formulario
+                        $rol = new Rol(
+                            $_POST['nombreP'],
+                            $_POST['descripcion'],
+                            $_POST['precio'],
+                            $_POST['cantidad'],
+                            $_POST['categoria'],
+                            $imagenNombre     // Aquí asumo que querías almacenar el nombre de la imagen en la base de datos
+                        );
+        
+                        // Mostrar mensaje de éxito
+                        echo '<p>La imagen se ha subido correctamente.</p>';
+        
+                        // Intentar crear el producto en la base de datos
+                        try {
+                            $rol->createProductos(); // Aquí deberías llamar a la función que guarda el producto en la base de datos
+                            header("Location: ?c=menuV"); // Redireccionar a algún lugar después de crear el producto
+                            exit(); // Terminar el script para evitar la ejecución adicional de código
+                        } catch (Exception $e) {
+                            echo "Error al crear el producto: " . $e->getMessage();
+                        }
+                    } else {
+                        // Mostrar errores
+                        foreach ($errors as $error) {
+                            echo '<p>' . $error . '</p>';
+                        }
+                    }
+                
+        
+                }}}
+        
     
+    public function verProduct() {
+        session_start();
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            
+            $roles = new Rol;
+            $roles = $roles->productRead();
+            require_once "views/vendedor/menu/header.php";
+            require_once "views/vendedor/menu/ver.php";
+            require_once "views/vendedor/menu/footer.php";
+    } 
+}
     // Uso del controlador
    
     
@@ -176,6 +216,6 @@ require_once "models/users/rol.php";
         // Consultar roles
 
 
-    }
+}
         
 ?>
