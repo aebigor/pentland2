@@ -5,7 +5,7 @@
         public static function connection(){            
             $hostname = "petland.mysql.database.azure.com";
             $port = "3306";
-            $database = "pentland";
+            $database = "pentland123";
             $username = "petland";
             $password = "Santy1314";
             $options = array(
