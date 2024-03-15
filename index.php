@@ -2,6 +2,7 @@
 // require_once "models/users/db1.php";
 require_once "models/users/db.php";
 $prueba = DataBase::connection();
+print_r($prueba);
 
 
     // if (!isset($_REQUEST['c'])) {
