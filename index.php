@@ -2,6 +2,12 @@
 // require_once "models/users/db1.php";
 require_once "models/users/DataBase.php";
 $prueba = DataBase::connection();
+try {
+    print "Todo bien";
+} catch (Exception $e) {
+    echo "Error al conectar db: " . $e->getMessage();
+}
+
 print $prueba;
 
 
