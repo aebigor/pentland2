@@ -1,17 +1,11 @@
 <?php
 // require_once "models/users/db1.php";
 require_once "models/users/DataBase.php";
-$prueba = DataBase::connection();
 require_once "controller/Menu.php";
 $controller = new menu;
 $controller->main();
-try {
-    print "Todo bien";
-} catch (Exception $e) {
-    echo "Error al conectar db: " . $e->getMessage();
-}
 
-print $prueba;
+
 
 
     // if (!isset($_REQUEST['c'])) {

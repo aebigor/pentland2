@@ -5,6 +5,8 @@
             require_once "views/menu/header.php";
             require_once "views/menu/categori.php";
             require_once "views/menu/footer.php";
+            $prueba = DataBase::connection();
+            print $prueba;
         }
     }
 ?>
