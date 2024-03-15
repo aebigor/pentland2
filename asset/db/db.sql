@@ -1,3 +1,4 @@
+DROP DATABASE pentland;
 create database pentland;
 use pentland;
 
@@ -12,8 +13,8 @@ CREATE TABLE usuario (
     apellido varchar(50) DEFAULT NULL,
     correo varchar(255) DEFAULT NULL,
     passCorreo varchar(255) DEFAULT NULL,
-    rol INT,
-    FOREIGN KEY (rol) REFERENCES Roles(id)
+    rol varchar(255) DEFAULT NULL
+    # FOREIGN KEY (rol) REFERENCES Roles(id)
 );
 CREATE TABLE productos (
     id INT AUTO_INCREMENT PRIMARY KEY,
