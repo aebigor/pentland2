@@ -1,6 +1,6 @@
 <?php
 // require_once "models/users/db1.php";
-require_once "models/users/db.php";
+require_once "models/users/DataBase.php";
 $prueba = DataBase::connection();
 print_r($prueba);
 
