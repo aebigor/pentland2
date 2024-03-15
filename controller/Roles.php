@@ -61,10 +61,10 @@ require_once "models/users/rol.php";
                             $_POST['passCorreo'],
                             $_POST['usuario'] = $usuario
                         );
-                    // Mostrar datos recibidos para verificar
-                    print_r($_POST);
-                    // Mostrar datos de la instancia de Rol para verificar
-                    print_r($rol);
+                    // // Mostrar datos recibidos para verificar
+                    // print_r($_POST);
+                    // // Mostrar datos de la instancia de Rol para verificar
+                    // print_r($rol);
                     // Intentar crear el rol en la base de datos
                     try {
                         $rol->createRol();
