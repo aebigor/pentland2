@@ -1,0 +1,49 @@
+/* Reset básico para la lista */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.header-menu nav {
+    background-color: #333;
+    color: white;
+}
+
+.menu-list {
+    list-style: none;
+    display: flex;
+    justify-content: left; /* Alinea los elementos del menú a la izquierda */
+    padding: 0;
+}
+
+.menu-list li {
+    position: relative;
+}
+
+.menu-list a {
+    display: block;
+    padding: 15px 20px;
+    color: white;
+    text-decoration: none;
+}
+
+/* Estilos para el submenú */
+.submenu {
+    display: none; /* Oculta el submenú */
+    position: absolute; /* Posiciona el submenú debajo del elemento del menú */
+    background-color: #444;
+    width: 100%;
+}
+
+.menu-list li:hover .submenu {
+    display: block; /* Muestra el submenú al pasar el ratón */
+}
+
+.submenu li {
+    display: block; /* Muestra los elementos del submenú en bloque */
+}

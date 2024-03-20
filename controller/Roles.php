@@ -1,5 +1,6 @@
 <?php 
 require_once "models/users/rol.php";
+require_once "models/users/user.php";
 
     class Roles{
         public function main(){
@@ -9,6 +10,7 @@ require_once "models/users/rol.php";
 
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 require_once "views/rol/header.php";
+                require_once "views/rol/encabezado.php";
             }
 
         }
@@ -20,6 +22,7 @@ require_once "models/users/rol.php";
                 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     require_once "views/usuario/registro/header.php";
                     require_once "views/usuario/registro/footer.php";
+                    require_once "views/usuario/registro/encabezado.php";
                 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     // Verificar si todos los datos necesarios están presentes
                     if (isset($_POST['nombre'], $_POST['apellidos'], $_POST['correo'], $_POST['passCorreo'])) {
@@ -31,7 +34,42 @@ require_once "models/users/rol.php";
                             $_POST['passCorreo'],
                             $_POST['usuario'] = $usuario
                         );
-                    // Mostrar datos recibidos para verificar
+                    // Mostrar datos recibidos para verificar 
+                    print_r($_POST);
+                    // Mostrar datos de la instancia de Rol para verificar
+                    print_r($rol);
+                    // Intentar crear el rol en la base de datos
+                    try {
+                        $rol->createRol();
+                         header("Location: ?c=Roles&a=validar");
+                    } catch (Exception $e) {
+                        echo "Error al crear el rol: " . $e->getMessage();
+                    }
+                } else {
+                    echo "Por favor, complete todos los campos del formulario.";
+                }
+            }}
+            public function createRolUsuarioA(){
+                if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+                            
+                    require_once "views/administrador/menu/header.php";
+                    // require_once "views/administrador/menu/categori.php";
+                    require_once "views/administrador/menu/footer.php";
+                    require_once "views/usuario/registro/header.php";
+                    require_once "views/usuario/registro/footer.php";
+                    require_once "views/usuario/registro/encabezado.php";
+                } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    // Verificar si todos los datos necesarios están presentes
+                    if (isset($_POST['nombre'], $_POST['apellidos'], $_POST['correo'], $_POST['passCorreo'])) {
+                        $usuario = 'Usuario'; // Asigna el rol de usuario automáticamente
+                        $rol = new Rol(
+                            $_POST['nombre'],
+                            $_POST['apellidos'],
+                            $_POST['correo'],
+                            $_POST['passCorreo'],
+                            $_POST['usuario'] = $usuario
+                        );
+                    // Mostrar datos recibidos para verificar 
                     print_r($_POST);
                     // Mostrar datos de la instancia de Rol para verificar
                     print_r($rol);
@@ -50,6 +88,42 @@ require_once "models/users/rol.php";
                 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     require_once "views/vendedor/registroV/header.php";
                     require_once "views/vendedor/registroV/footer.php";
+                    require_once "views/vendedor/registroV/encabezado.php";
+                } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    // Verificar si todos los datos necesarios están presentes
+                    if (isset($_POST['nombre'], $_POST['apellidos'], $_POST['correo'], $_POST['passCorreo'])) {
+                        $usuario = 'Vendedor'; // Asigna el rol de usuario automáticamente
+                        $rol = new Rol(
+                            $_POST['nombre'],
+                            $_POST['apellidos'],
+                            $_POST['correo'],
+                            $_POST['passCorreo'],
+                            $_POST['usuario'] = $usuario
+                        );
+                    // // Mostrar datos recibidos para verificar
+                    // print_r($_POST);
+                    // // Mostrar datos de la instancia de Rol para verificar
+                    // print_r($rol);
+                    // Intentar crear el rol en la base de datos
+                    try {
+                        $rol->createRol();
+                         header("Location: ?c=Roles&a=validar");
+                    } catch (Exception $e) {
+                        echo "Error al crear el rol: " . $e->getMessage();
+                    }
+                } else {
+                    echo "Por favor, complete todos los campos del formulario.";
+                }
+            }}
+            public function createRolVendedorA(){
+                if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+                    
+                    require_once "views/administrador/menu/header.php";
+                    // require_once "views/administrador/menu/categori.php";
+                    require_once "views/administrador/menu/footer.php";
+                    require_once "views/vendedor/registroV/header.php";
+                    require_once "views/vendedor/registroV/footer.php";
+                    require_once "views/vendedor/registroV/encabezado.php";
                 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     // Verificar si todos los datos necesarios están presentes
                     if (isset($_POST['nombre'], $_POST['apellidos'], $_POST['correo'], $_POST['passCorreo'])) {
@@ -83,6 +157,7 @@ require_once "models/users/rol.php";
                 require_once "views/inicio-secion/header.php";
                // Aquí deberías incluir tu formulario de inicio de sesión
                 require_once "views/inicio-secion/footer.php";
+                require_once "views/inicio-secion/encabezado.php";
             }
         
             // Si la solicitud es POST, intentamos validar el inicio de sesión
@@ -112,110 +187,215 @@ require_once "models/users/rol.php";
         }
         
         
-        public function createRolAdministrador(){
+        public function createRolAdmin(){
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-                require_once "views/registro/header.php";
-                require_once "views/registro/footer.php";
+                require_once "views/administrador/registro/header.php";
+                require_once "views/administrador/registro/footer.php";
+                require_once "views/administrador/registro/encabezado.php";
             }
             
             
-            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (isset($_POST['nombre'], $_POST['apellidos'], $_POST['correo'], $_POST['passCorreo'])) {
+                $usuario = 'Admin'; // Asigna el rol de usuario automáticamente
                 $rol = new Rol(
-                    null,
-                    $_POST['code'],
                     $_POST['nombre'],
-                    $_POST['apellido'],
-                    $_POST['usuario'],
-                    $_POST['password']
-                    
-                );                
-                // $rol->rolCreate();
-                header("Location: Menu.php");
+                    $_POST['apellidos'],
+                    $_POST['correo'],
+                    $_POST['passCorreo'],
+                    $_POST['usuario'] = $usuario
+                );
+            // // Mostrar datos recibidos para verificar
+            // print_r($_POST);
+            // // Mostrar datos de la instancia de Rol para verificar
+            // print_r($rol);
+            // Intentar crear el rol en la base de datos
+            try {
+                $rol->createRol();
+                 header("Location: ?c=Roles&a=validar");
+            } catch (Exception $e) {
+                echo "Error al crear el rol: " . $e->getMessage();
             }
         }
-
-        public function createProduct() {
-            session_start();
+    }
+    public function createRolAdminA(){
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            
+            require_once "views/administrador/menu/header.php";
+            // require_once "views/administrador/menu/categori.php";
+            require_once "views/administrador/menu/footer.php";
+            require_once "views/administrador/registro/header.php";
+            require_once "views/administrador/registro/footer.php";
+            require_once "views/administrador/registro/encabezado.php";
+        }
         
-            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-                require_once "views/vendedor/menu/header.php";
-                require_once "views/vendedor/menu/categori.php";
-                require_once "views/vendedor/menu/footer.php";
-            }
         
-            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                // Verificar si todos los datos necesarios están presentes   
-                if (isset($_POST['nombreP'],$_POST['descripcion'],$_POST['precio'],$_POST['cantidad'],$_FILES['imagen'])) {
+        if (isset($_POST['nombre'], $_POST['apellidos'], $_POST['correo'], $_POST['passCorreo'])) {
+            $usuario = 'Admin'; // Asigna el rol de usuario automáticamente
+            $rol = new Rol(
+                $_POST['nombre'],
+                $_POST['apellidos'],
+                $_POST['correo'],
+                $_POST['passCorreo'],
+                $_POST['usuario'] = $usuario
+            );
+        // // Mostrar datos recibidos para verificar
+        // print_r($_POST);
+        // // Mostrar datos de la instancia de Rol para verificar
+        // print_r($rol);
+        // Intentar crear el rol en la base de datos
+        try {
+            $rol->createRol();
+             header("Location: ?c=Roles&a=validar");
+        } catch (Exception $e) {
+            echo "Error al crear el rol: " . $e->getMessage();
+        }
+    }
+}
+    public function createProduct() {
+        session_start();
+        $errors = array(); // Array para almacenar errores
+        
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            require_once "views/vendedor/menu/header.php";
+            require_once "views/vendedor/menu/categori.php";
+            require_once "views/vendedor/menu/footer.php";
+        } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (isset($_POST['nombreP'], $_POST['descripcion'], $_POST['precio'], $_POST['cantidad'], $_FILES['imagen']['name'])) {
                 // Validar la imagen
-                if (empty($_FILES['imagen']['name'])) {
-                    $errors['imagen'] = 'La imagen no se ha subido correctamente.';
-                }
-
-                $allowedExtensions = array('jpg', 'jpeg', 'png', 'gif');
-                $extension = pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
+                $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+                $extension = strtolower(pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION));
+    
                 if (!in_array($extension, $allowedExtensions)) {
                     $errors['imagen'] = 'La imagen debe tener una extensión válida.';
                 }
-
-                // Almacenar la imagen
-                if (!isset($errors)) {
-                    $imagenNombre = uniqid() . '.' . $extension;
+    
+                // Validaciones adicionales para otros campos requeridos
+                if (empty($_POST['categoria'])) {
+                    $errors['categoria'] = 'Por favor, selecciona una categoría.';
+                }
+    
+                if (empty($_POST['nombreP']) || empty($_POST['descripcion']) || empty($_POST['precio']) || empty($_POST['cantidad'])) {
+                    $errors['otros'] = 'Por favor, completa todos los campos necesarios.';
+                }
+    
+                // Si no hay errores, procedemos con la subida de la imagen y la creación del producto
+                if (empty($errors)) {
+                    $imagenNombre = uniqid() . '.' . $extension; // Generar un nombre único para la imagen
                     $target_dir = "img/";
-                    $target_file = $target_dir . $imagenNombre;
-
-                        move_uploaded_file($_FILES['imagen']['tmp_name'], $target_file);
-        
-                        // Crear un nuevo objeto de la clase Rol con los datos del formulario
+                    $target_file = $target_dir . basename($imagenNombre);
+    
+                    if (move_uploaded_file($_FILES['imagen']['tmp_name'], $target_file)) {
+                        // Inicializar el objeto Rol con los datos
                         $rol = new Rol(
                             $_POST['nombreP'],
                             $_POST['descripcion'],
                             $_POST['precio'],
                             $_POST['cantidad'],
-                            $_POST['categoria'],
-                            $imagenNombre     // Aquí asumo que querías almacenar el nombre de la imagen en la base de datos
+                            $_POST['categoria']
                         );
-        
-                        // Mostrar mensaje de éxito
-                        echo '<p>La imagen se ha subido correctamente.</p>';
-        
-                        // Intentar crear el producto en la base de datos
+    
                         try {
-                            $rol->createProductos(); // Aquí deberías llamar a la función que guarda el producto en la base de datos
-                            header("Location: ?c=menuV"); // Redireccionar a algún lugar después de crear el producto
-                            exit(); // Terminar el script para evitar la ejecución adicional de código
+                            // Llamar a createProductos y pasar la imagen como argumento
+                            $rol->createProductos($imagenNombre);
+                            echo '<p>Producto creado con éxito.</p>';
+                            header("Location: ?c=menuV"); // Redirigir al controlador deseado
                         } catch (Exception $e) {
-                            echo "Error al crear el producto: " . $e->getMessage();
+                            $errors['db'] = "Error al crear el producto: " . $e->getMessage();
                         }
                     } else {
-                        // Mostrar errores
-                        foreach ($errors as $error) {
-                            echo '<p>' . $error . '</p>';
-                        }
+                        $errors['imagen'] = 'Error al subir la imagen.';
                     }
-                
-        
-                }}}
-        
+                }
+            } else {
+                echo "Por favor, complete todos los campos del formulario.";
+            }
+        }
     
-    public function verProduct() {
+        // Mostrar errores si los hay
+        if (!empty($errors)) {
+            foreach ($errors as $key => $error) {
+                echo "<p>Error ($key): $error</p>";
+            }
+        }
+    }
+
+    public function createProductA() {
         session_start();
+        $errors = array(); // Array para almacenar errores
+        
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            
-            $roles = new Rol;
-            $roles = $roles->productRead();
-            require_once "views/vendedor/menu/header.php";
-            require_once "views/vendedor/menu/ver.php";
+            require_once "views/administrador/menu/header.php";
+            require_once "views/vendedor/menu/categori.php";
             require_once "views/vendedor/menu/footer.php";
-    } 
-}
-    // Uso del controlador
-   
+        } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (isset($_POST['nombreP'], $_POST['descripcion'], $_POST['precio'], $_POST['cantidad'], $_FILES['imagen']['name'])) {
+                // Validar la imagen
+                $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+                $extension = strtolower(pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION));
     
+                if (!in_array($extension, $allowedExtensions)) {
+                    $errors['imagen'] = 'La imagen debe tener una extensión válida.';
+                }
+    
+                // Validaciones adicionales para otros campos requeridos
+                if (empty($_POST['categoria'])) {
+                    $errors['categoria'] = 'Por favor, selecciona una categoría.';
+                }
+    
+                if (empty($_POST['nombreP']) || empty($_POST['descripcion']) || empty($_POST['precio']) || empty($_POST['cantidad'])) {
+                    $errors['otros'] = 'Por favor, completa todos los campos necesarios.';
+                }
+    
+                // Si no hay errores, procedemos con la subida de la imagen y la creación del producto
+                if (empty($errors)) {
+                    $imagenNombre = uniqid() . '.' . $extension; // Generar un nombre único para la imagen
+                    $target_dir = "img/";
+                    $target_file = $target_dir . basename($imagenNombre);
+    
+                    if (move_uploaded_file($_FILES['imagen']['tmp_name'], $target_file)) {
+                        // Inicializar el objeto Rol con los datos
+                        $rol = new Rol(
+                            $_POST['nombreP'],
+                            $_POST['descripcion'],
+                            $_POST['precio'],
+                            $_POST['cantidad'],
+                            $_POST['categoria']
+                        );
+    
+                        try {
+                            // Llamar a createProductos y pasar la imagen como argumento
+                            $rol->createProductos($imagenNombre);
+                            echo '<p>Producto creado con éxito.</p>';
+                            header("Location: ?c=menuV"); // Redirigir al controlador deseado
+                        } catch (Exception $e) {
+                            $errors['db'] = "Error al crear el producto: " . $e->getMessage();
+                        }
+                    } else {
+                        $errors['imagen'] = 'Error al subir la imagen.';
+                    }
+                }
+            } else {
+                echo "Por favor, complete todos los campos del formulario.";
+            }
+        }
+    
+        // Mostrar errores si los hay
+        if (!empty($errors)) {
+            foreach ($errors as $key => $error) {
+                echo "<p>Error ($key): $error</p>";
+            }
+        }
+    }
+      
+        
+    
+}
+
     // Suponiendo que $_POST y $_FILES contienen los datos del formulario
 
         // Consultar roles
 
 
-}
+
         
 ?>

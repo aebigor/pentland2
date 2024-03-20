@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="asset/css/normalize.css">
 
 	<link rel="stylesheet" href="asset/css/productos.css">
+	<link rel="stylesheet" href="asset/css/encabezado.css">
 	<!-- Bootstrap V4.3 -->
 	<link rel="stylesheet" href="asset/css/bootstrap.min.css">
 
@@ -30,9 +31,6 @@
 
 	<!-- General Styles -->
 	<link rel="stylesheet" href="asset/css/style.css">
-
-	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
-
 
 
 </head>
@@ -58,13 +56,36 @@
 						
 
 						<li>
-							<a href="?c=Roles&a=createProduct" class="nav-btn-submenu"><i class="fas  fas fa-users fa-fw"></i> &nbsp; registrar venta <i class="fas fa-chevron-down"></i></a>
+							<a href="#" class="nav-btn-submenu"><i class="fas  fas fa-users fa-fw"></i> &nbsp; registrar venta <i class="fas fa-chevron-down"></i></a>
+							<ul>
+								
+								<li>
+									<a href="?c=Roles&a=createProductA"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Registrar producto</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="#" class="nav-btn-submenu"><i class="fas  fas fa-users fa-fw"></i> &nbsp; Registrar Usuarios <i class="fas fa-chevron-down"></i></a>
 							<ul>
 								<li>
-									<a href="?c=Roles&a=verProduct"><i class="fas fa-plus fa-fw"></i> &nbsp; ver productos</a>
+									<a href="?c=Roles&a=createRolVendedorA"><i class="fas fa-plus fa-fw"></i> &nbsp; Registrar Vendedor</a>
 								</li>
 								<li>
-									<a href="?c=Roles&a=createProduct"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Registrar producto</a>
+									<a href="?c=Roles&a=createRolUsuarioA"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Registrar Usuario</a>
+								</li>
+								<li>
+									<a href="?c=Roles&a=createRolAdminA"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Registrar Administrador</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="#" class="nav-btn-submenu"><i class="fas  fas fa-users fa-fw"></i> &nbsp; Visualizar <i class="fas fa-chevron-down"></i></a>
+							<ul>
+								<li>
+									<a href="?c=User&a=verProductA"><i class="fas fa-plus fa-fw"></i> &nbsp; Ver productos</a>
+								</li>
+								<li>
+									<a href="?c=User&a=verUsuario"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Ver Usuarios</a>
 								</li>
 							</ul>
 						</li>
@@ -80,7 +101,7 @@
 			<nav class="full-box navbar-info">
 				<a href="#" class="float-left show-nav-lateral">
 					<i class="fas fa-exchange-alt"></i>
-				</a>
+				</a>s
 				<a href="user-update.html">
 					<i class="fas fa-user-cog"></i>
 				</a>
