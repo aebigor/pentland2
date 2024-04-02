@@ -39,27 +39,29 @@ require_once "models/users/user.php";
         } 
     }
     public function deleteRol(){
+        // Verifica que la solicitud sea GET
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $users = isset($_GET['Id']) ? $_GET['Id'] : null;
-           
-    
-            if ($users) {
-                $users = new users();
-                $users = $users->rolDelete($_GET['Id']);
-                header("Location:?c=User&a=verUsuario");
-    
-                if ($users) { 
-                    $users = new users();
-                    $users->rolDelete($_GET['Id']);
-                    header("Location:?c=User&a=verUsuario");
+            // Obtén el ID del usuario a eliminar
+            $userId = isset($_GET['Id']) ? $_GET['Id'] : null;
+            
+            // Si se proporciona un ID de usuario
+            if ($userId) {
+                // Instancia la clase 'users'
+                $usersModel = new users();
+                
+                // Intenta eliminar el rol
+                if ($usersModel->rolDelete($userId)) { 
+                    // Redirige después de la eliminación exitosa
+                    header("Location: ?c=User&a=verUsuario");
+                    exit; // Importante: detener la ejecución después de la redirección
                 } else {
                     // Manejar el caso en que no se encuentra el rol
                     echo "El rol no se encontró";
                 }
             } else {
-                // Manejar el caso en que no se proporciona un código de rol
-                echo "Código de rol no proporcionado";
+                // Manejar el caso en que no se proporciona un ID de usuario
+                echo "ID de usuario no proporcionado";
             }
         }
     }
-        }
+    }    

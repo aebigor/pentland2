@@ -389,12 +389,8 @@ require_once "models/users/user.php";
       
         
     
+
 }
-
-    // Suponiendo que $_POST y $_FILES contienen los datos del formulario
-
-        // Consultar roles
-
 
 
         

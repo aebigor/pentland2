@@ -1,0 +1,52 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.formulario-pago {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: auto;
+}
+
+.formulario-pago h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.formulario-pago input, .formulario-pago button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.formulario-pago button {
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.formulario-pago button:hover {
+    background-color: #4cae4c;
+}
+
+#productos-lista {
+    margin-bottom: 20px;
+}
+
+.total {
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.total strong {
+    margin-right: 5px;
+}

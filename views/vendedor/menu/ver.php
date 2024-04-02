@@ -55,7 +55,7 @@
     </a>
 </td>
 <td>
-    <a href="?c=Roles&a=deleteRol&idRol=<?php echo $users->getId(); ?>" class="btn btn-warning">
+    <a href="?c=User&a=deleteRol&idRol=<?php echo $users->getId(); ?>" class="btn btn-warning">
         <i class="far fa-trash-alt"></i> Eliminar
     </a>
 </td>

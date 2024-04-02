@@ -51,6 +51,9 @@
                                 <tbody></tbody>
                             </table>
                             <a href="#" id="vaciar-carrito" class="btn-3">vaciar carrito</a>
+                            
+                            <a href="#" id="procesar-pago" class="btn-3">Procesar Pago</a>
+
                         </div>
                     </li>
                 </ul>
