@@ -267,6 +267,24 @@
             }
         }
         
+        public function getAllProducts() {
+            try {
+                // Preparar la consulta SQL para obtener todos los productos
+                $sql = "SELECT * FROM productos";
+                $stmt = $this->dbh->prepare($sql);
+                
+                // Ejecutar la consulta
+                $stmt->execute();
         
-}                               
+                // Obtener los resultados
+                $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+                return $products;
+            } catch (PDOException $e) {
+                // Capturar y manejar los errores de PDO
+                throw new Exception("Error al obtener los productos: " . $e->getMessage());
+            }
+             
+} 
+    }                              
 ?>

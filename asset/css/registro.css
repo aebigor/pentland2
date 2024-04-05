@@ -541,3 +541,41 @@ box img {
     color: #000;
     
 }
+
+/* Estilos para las imágenes de los productos */
+.product-img {
+    width: 100%; /* Ajustar el ancho de la imagen al contenedor */
+    height: auto; /* Mantener la proporción de aspecto */
+    border-radius: 10px; /* Añadir bordes redondeados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Agregar sombra */
+    transition: transform 0.3s ease; /* Agregar transición al efecto hover */
+}
+
+.product-img:hover {
+    transform: scale(1.05); /* Efecto de zoom al pasar el mouse */
+}
+
+.product-img:focus {
+    outline: none; /* Eliminar el borde al enfocar la imagen */
+}
+.producto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .imagen-producto {
+    height: 200px;
+    width: 200px;
+    margin: 10px;
+    background-color: white;
+  }
+  
+  h2 {
+    margin: 10px;
+  }
+  
+  p {
+    margin: 10px;
+  }
+  

@@ -2,6 +2,8 @@
 require_once "models/users/rol.php";
 require_once "models/users/user.php";
 
+
+
     class Roles{
         public function main(){
             header("Location:?c=menu");
@@ -35,9 +37,9 @@ require_once "models/users/user.php";
                             $_POST['usuario'] = $usuario
                         );
                     // Mostrar datos recibidos para verificar 
-                    print_r($_POST);
-                    // Mostrar datos de la instancia de Rol para verificar
-                    print_r($rol);
+                    // print_r($_POST);
+                    // // Mostrar datos de la instancia de Rol para verificar
+                    // print_r($rol);
                     // Intentar crear el rol en la base de datos
                     try {
                         $rol->createRol();
@@ -70,9 +72,9 @@ require_once "models/users/user.php";
                             $_POST['usuario'] = $usuario
                         );
                     // Mostrar datos recibidos para verificar 
-                    print_r($_POST);
-                    // Mostrar datos de la instancia de Rol para verificar
-                    print_r($rol);
+                    // print_r($_POST);
+                    // // Mostrar datos de la instancia de Rol para verificar
+                    // print_r($rol);
                     // Intentar crear el rol en la base de datos
                     try {
                         $rol->createRol();
@@ -386,7 +388,20 @@ require_once "models/users/user.php";
             }
         }
     }
-      
+    public function mostrarMenu() {
+        $producto = new producto();
+        $productos = $producto->fetchAllProductos();
+    
+        require_once 'views/menu/header.php'; // Include header view
+        require_once 'views/menu/categori.php'; // Include categori view
+        require_once 'views/menu/footer.php';
+        
+        require_once "models/users/producto.php";// Include footer view
+    
+        // Pass data to views using variables (explained later)
+      }
+    
+    
         
     
 
