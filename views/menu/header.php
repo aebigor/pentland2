@@ -4,6 +4,7 @@
 <title>menu-p</title>
 <meta charset="UTF-8">
 <link rel ="stylesheet" href="asset/css/registro.css" type="text/css">
+<link rel ="stylesheet" href="asset/css/categoria.css" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <style>
 </style>
@@ -21,9 +22,9 @@
                 <ul>
                     <li><a href="#">inicio</a></li>
                     <li><a href="#">servicios</a></li>
-                    <li><a href="#">productos</a></li>
+                    <li><a href="#">categoria</a></li>
                     <li><a href="#">contacto</a></li>
-                    <li><a href="?c=Roles&a=validar" >inicio secion</a></li>
+                    <li><a href="?c=Roles&a=validar" >inicio sesion</a></li>
                     <li><a href="?c=Roles&a=mostrarFormularioRol" >registrar</a></li>
                     
                 </ul>
@@ -47,12 +48,16 @@
                                         <th>imagen</th>
                                         <th>nombre</th>
                                         <th>precio</th>
+                                        <th>cantidad</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
                             </table>
                             <a href="#" id="vaciar-carrito" class="btn-3">vaciar carrito</a>
+                            
+
                         </div>
+                        <div id="total-carrito">$0.00</div>
                     </li>
                 </ul>
             </div>

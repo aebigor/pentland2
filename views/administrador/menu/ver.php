@@ -1,7 +1,7 @@
 <div class="container-fluid">
 				<ul class="full-box list-unstyled page-nav-tabs">
 					<li>
-						<a href=""><i class=""></i> &nbsp; NUEVO PRODUCTO</a>
+						<a href="?c=Roles&a=createRolUsuarioA"><i class=""></i> &nbsp; NUEVO PRODUCTO</a>
 					</li>
 					<li>
 						<a class="active" href=""><i class=""></i> &nbsp; LISTA DE PRODUCTOS</a>
@@ -41,20 +41,24 @@
 												<td><?php echo $users->getcorreo(); ?></td>
 												<td><?php echo $users->getrol(); ?></td>
 												<td>
-												    <a href="?c=Roles&a=updateRol&idRol=<?php echo $users->getId(); ?>" class="btn btn-success">
+												    <a href="?c=User&a=editUsuario&idUsuario=<?php echo $users->getId(); ?>" class="btn btn-success">
 												        <i class="fas fa-sync-alt"></i> Actualizar
 												    </a>
+
 												</td>
 												<td>
-												    <a href="?c=User&a=deleteRol&Id=<?php echo $users->getId(); ?>" class="btn btn-warning">
-												        <i class="far fa-trash-alt"></i> Eliminar
-												    </a>
+												    <form method="post" action="?c=User&a=deleteUsuario&idRol=">
+												        <input type="hidden" name="id" value="<?php echo $users->getId(); ?>">
+												        <button type="submit" class="btn btn-danger">Eliminar Producto</button>
+												    </form>
 												</td>
+
+
 										
 											</tr>
 										<?php endforeach;
 									} else {
-										echo '<tr><td colspan="9">No hay productos disponibles.</td></tr>';
+										echo '<tr><td colspan="7">No hay productos disponibles.</td></tr>';
 									}
 							?>
 						</tbody>

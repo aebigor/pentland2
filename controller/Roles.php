@@ -368,7 +368,7 @@ require_once "models/users/user.php";
                             // Llamar a createProductos y pasar la imagen como argumento
                             $rol->createProductos($imagenNombre);
                             echo '<p>Producto creado con éxito.</p>';
-                            header("Location: ?c=menuV"); // Redirigir al controlador deseado
+                            header("Location: ?c=menuA"); // Redirigir al controlador deseado
                         } catch (Exception $e) {
                             $errors['db'] = "Error al crear el producto: " . $e->getMessage();
                         }
@@ -388,18 +388,18 @@ require_once "models/users/user.php";
             }
         }
     }
-    public function mostrarMenu() {
-        $producto = new producto();
-        $productos = $producto->fetchAllProductos();
+    // public function mostrarMenu() {
+    //     $producto = new producto();
+    //     $productos = $producto->fetchAllProductos();
     
-        require_once 'views/menu/header.php'; // Include header view
-        require_once 'views/menu/categori.php'; // Include categori view
-        require_once 'views/menu/footer.php';
+    //     require_once 'views/menu/header.php'; // Include header view
+    //     require_once 'views/menu/categori.php'; // Include categori view
+    //     require_once 'views/menu/footer.php';
         
-        require_once "models/users/producto.php";// Include footer view
+    //     require_once "models/users/producto.php";// Include footer view
     
-        // Pass data to views using variables (explained later)
-      }
+    //     // Pass data to views using variables (explained later)
+    //   }
     
     
         

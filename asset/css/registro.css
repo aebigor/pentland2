@@ -541,41 +541,22 @@ box img {
     color: #000;
     
 }
-
-/* Estilos para las imágenes de los productos */
-.product-img {
-    width: 100%; /* Ajustar el ancho de la imagen al contenedor */
-    height: auto; /* Mantener la proporción de aspecto */
-    border-radius: 10px; /* Añadir bordes redondeados */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Agregar sombra */
-    transition: transform 0.3s ease; /* Agregar transición al efecto hover */
+/* Estilos para los títulos de la tabla */
+#lista-carrito thead {
+    position: sticky;
+    top: 0;
+    background-color: black;
+    color: white;
+    z-index: 1; /* Asegura que los títulos estén por encima del contenido */
 }
 
-.product-img:hover {
-    transform: scale(1.05); /* Efecto de zoom al pasar el mouse */
+/* Estilo para las celdas de la tabla */
+#lista-carrito td {
+    vertical-align: middle; /* Centra el contenido verticalmente */
 }
 
-.product-img:focus {
-    outline: none; /* Eliminar el borde al enfocar la imagen */
+/* Estilo para la imagen en la tabla */
+#lista-carrito img {
+    max-width: 100px; /* Ajusta el tamaño máximo de la imagen */
+    height: auto; /* Ajusta la altura automáticamente */
 }
-.producto {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .imagen-producto {
-    height: 200px;
-    width: 200px;
-    margin: 10px;
-    background-color: white;
-  }
-  
-  h2 {
-    margin: 10px;
-  }
-  
-  p {
-    margin: 10px;
-  }
-  

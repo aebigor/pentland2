@@ -34,7 +34,7 @@
             }
         
         }
-        public function __construct5($Id, $nombre , $apellidos , $correo ,$rol,){
+        public function __construct5($Id, $nombre, $apellidos, $correo, $rol){
             $this->rol = $rol;    
             $this->Id = $Id;
             $this->nombre = $nombre;
@@ -44,7 +44,7 @@
           
         }
         
-        public function __construct2($correo , $passCorreo){
+        public function __construct2($correo, $passCorreo){
         
     
             $this->correo = $correo;
@@ -52,14 +52,14 @@
         
             // Resto del código...
         }
-        public function __construct1($Id ){
+        public function __construct1($Id){
         
             $this->Id = $Id;
         
             // Resto del código...
         }
         
-        public function __construct7($Id, $nombreP , $descripcion , $precio , $cantidad , $categoria , $imagen)
+        public function __construct7($Id, $nombreP, $descripcion, $precio, $cantidad, $categoria, $imagen)
         {
             $this->Id = $Id;
             $this->nombreP = $nombreP;
@@ -208,18 +208,146 @@
                 die($e->getMessage());
             }
         }
-        public function rolDelete($Id){
+        public function productoDeleteA($Id) {
+            try {
+                $sql = 'DELETE FROM productos WHERE Id = :Id';
+                $stmt = $this->dbh->prepare($sql);
+                $stmt->bindValue(':Id', $Id);
+                $stmt->execute();
+                
+                // Verificar si se eliminó alguna fila
+                $rowsAffected = $stmt->rowCount();
+                
+                // Si se eliminó al menos una fila, redireccionar a la página de productos
+                if ($rowsAffected > 0) {
+                    header("Location:?c=User&a=verProductA");
+                    exit;
+                } else {
+                    // En caso contrario, mostrar un mensaje de error
+                    echo "No se pudo eliminar el producto.";
+                }
+            } catch (Exception $e) {
+                // Manejar cualquier excepción que ocurra durante la eliminación
+                die("Error al eliminar el producto: " . $e->getMessage());
+            } 
+        }
+        public function usuarioDelete($Id) {
             try {
                 $sql = 'DELETE FROM usuario WHERE Id = :Id';
                 $stmt = $this->dbh->prepare($sql);
-                $stmt->bindValue(':Id', $Id);  // Asegúrate de pasar el código del rol, no el objeto Rol
+                $stmt->bindValue(':Id', $Id);
                 $stmt->execute();
+                
+                // Verificar si se eliminó alguna fila
+                $rowsAffected = $stmt->rowCount();
+                
+                // Si se eliminó al menos una fila, redireccionar a la página de productos
+                if ($rowsAffected > 0) {
+                    header("Location:?c=User&a=verUsuario");
+                    exit;
+                } else {
+                    // En caso contrario, mostrar un mensaje de error
+                    echo "No se pudo eliminar el producto.";
+                }
             } catch (Exception $e) {
-                die($e->getMessage());
+                // Manejar cualquier excepción que ocurra durante la eliminación
+                die("Error al eliminar el producto: " . $e->getMessage());
             } 
         }
         
+        // Función para eliminar un usuario
+        
+        // En models/users/user.php
+
+        public function productoUpdate($Id, $nombreP, $descripcion, $precio, $cantidad, $categoria, $imagen) {
+            try {
+                $sql = "UPDATE productos SET nombreP = :nombreP, descripcion = :descripcion, precio = :precio, cantidad = :cantidad, categoria = :categoria, imagen = :imagen WHERE Id = :id";
+                $stmt = $this->dbh->prepare($sql);
+                $stmt->bindParam(':nombreP', $nombreP);
+                $stmt->bindParam(':descripcion', $descripcion);
+                $stmt->bindParam(':precio', $precio);
+                $stmt->bindParam(':cantidad', $cantidad);
+                $stmt->bindParam(':categoria', $categoria);
+                $stmt->bindParam(':imagen', $imagen);
+                $stmt->bindParam(':id', $Id); // Corregido aquí
+                return $stmt->execute();
+            } catch (PDOException $e) {
+                die($e->getMessage());
+            }
+        }
+        
+        
+        public function productoReadById($Id) {
+            try {
+                $sql = 'SELECT * FROM productos WHERE id = :id';
+                $stmt = $this->dbh->prepare($sql);
+                $stmt->bindParam(':id', $Id, PDO::PARAM_INT);
+                $stmt->execute();
+                $Users = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+                if ($Users) {
+                    return new users(
+                        $Users['id'],
+                        $Users['nombreP'],
+                        $Users['descripcion'],
+                        $Users['precio'],
+                        $Users['cantidad'],
+                        $Users['categoria'],
+                        $Users['imagen']
+                    );
+                } else {
+                    return null;
+                }
+            } catch (PDOException $e) {
+                die($e->getMessage());
+            }
+        }
+        public function usuarioUpdate($Id, $nombreP, $descripcion, $precio, $cantidad, $categoria, $imagen) {
+            try {
+                $sql = "UPDATE productos SET nombreP = :nombreP, descripcion = :descripcion, precio = :precio, cantidad = :cantidad, categoria = :categoria, imagen = :imagen WHERE Id = :id";
+                $stmt = $this->dbh->prepare($sql);
+                $stmt->bindParam(':nombreP', $nombreP);
+                $stmt->bindParam(':descripcion', $descripcion);
+                $stmt->bindParam(':precio', $precio);
+                $stmt->bindParam(':cantidad', $cantidad);
+                $stmt->bindParam(':categoria', $categoria);
+                $stmt->bindParam(':imagen', $imagen);
+                $stmt->bindParam(':id', $Id); // Corregido aquí
+                return $stmt->execute();
+            } catch (PDOException $e) {
+                die($e->getMessage());
+            }
+        }
+        
+        
+        public function usuarioReadById($Id) {
+            try {
+                $sql = 'SELECT * FROM usuario WHERE id = :id';
+                $stmt = $this->dbh->prepare($sql);
+                $stmt->bindParam(':id', $Id, PDO::PARAM_INT);
+                $stmt->execute();
+                $Users = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+                if ($Users) {
+                    return new users(
+                        null,
+                        $Users['nombre'],
+                        $Users['apellido'],
+                        $Users['correo'],
+                        $Users['rol'],
+                        
+                    );
+                } else {
+                    return null;
+                }
+            } catch (PDOException $e) {
+                die($e->getMessage());
+            }
+        }
+        
     }
+        
+    
         
     
 ?>

@@ -9,10 +9,10 @@
 <div class="container-fluid">
   <ul class="full-box list-unstyled page-nav-tabs">
     <li>
-      <a href="?c=Roles&a=createProduct"><i class=""></i> &nbsp; NUEVO PRODUCTO</a>
+      <a href="?c=Roles&a=createProductA"><i class=""></i> &nbsp; NUEVO PRODUCTO</a>
     </li>
     <li>
-      <a class="?c=Roles&a=verProduct" href=""><i class=""></i> &nbsp; LISTA DE PRODUCTOS</a>
+      <a class="?c=Roles&a=verProductA" href=""><i class=""></i> &nbsp; LISTA DE PRODUCTOS</a>
     </li>
     <li>
       <a href=""><i class=""></i> &nbsp; BUSCAR PRODUCTO</a>
@@ -50,18 +50,20 @@
 					<td><?php echo $users->getcategoria(); ?></td>
 					<td><img src="img/<?php echo $users->getImagen(); ?>" alt="Imagen de producto" class="product-image"></td>
 					<td>
-    <a href="?c=Roles&a=updateRol&idRol=<?php echo $users->getId(); ?>" class="btn btn-success">
-        <i class="fas fa-sync-alt"></i> Actualizar
-    </a>
+                    <a href="?c=User&a=editProducto&idProducto=<?php echo $users->getId(); ?>" class="btn btn-success">
+              <i class="fas fa-sync-alt"></i> Actualizar
+          </a>
+
 </td>
 <td>
-    <a href="?c=User&a=deleteRol&idRol=<?php echo $users->getId(); ?>" class="btn btn-warning">
-        <i class="far fa-trash-alt"></i> Eliminar
-    </a>
+    <form method="post" action="?c=User&a=deleteProducto&idRol=">
+        <input type="hidden" name="id" value="<?php echo $users->getId(); ?>">
+        <button type="submit" class="btn btn-danger">Eliminar Producto</button>
+    </form>
 </td>
 
 				</tr>
-			<?php endforeach;
+			<?php endforeach; 
 		} else {
 			echo '<tr><td colspan="9">No hay productos disponibles.</td></tr>';
 		}

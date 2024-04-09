@@ -44,11 +44,9 @@
 			<div class="full-box nav-lateral-bg show-nav-lateral"></div>
 			<div class="full-box nav-lateral-content">
 				<figure class="full-box nav-lateral-avatar">
-					<i class="far fa-times-circle show-nav-lateral"></i>
-					<img src="img/Avatar.png" class="img-fluid" alt="Avatar">
-					<figcaption class="roboto-medium text-center">
-						Santiago Basto <br><small class="roboto-condensed-light">Web Developer</small>
-					</figcaption>
+					
+					
+					
 				</figure>
 				<div class="full-box nav-lateral-bar"></div>
 				<nav class="full-box nav-lateral-menu">

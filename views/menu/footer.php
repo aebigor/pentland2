@@ -114,7 +114,7 @@
             </div>
         </div>
     </footer>
-
+<script src="asset/js/carrito.js" ></script>
 <script src="asset/js/funcionmenu.js" ></script>
 <script src="asset/js/carrusel.js" ></script>
 </body>

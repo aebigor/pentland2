@@ -286,5 +286,15 @@
             }
              
 } 
+public function Delete($Id){
+    try {
+        $sql = 'DELETE FROM * WHERE Id = :Id';
+        $stmt = $this->dbh->prepare($sql);
+        $stmt->bindValue(':Id', $Id);  // Asegúrate de pasar el código del rol, no el objeto Rol
+        $stmt->execute();
+    } catch (Exception $e) {
+        die($e->getMessage());
+    } 
+}
     }                              
 ?>
