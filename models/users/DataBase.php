@@ -3,11 +3,11 @@
     class DataBase{       
     
          public static function connection(){            
-            $hostname = "petland.mysql.database.azure.com";
+            $hostname = "is-yours-testing:us-central1:is-yours";
             $port = "3306";
-            $database = "pentland";
-            $username = "petland";
-            $password = "Santy1314";
+            $database = "is_yours_GCSQL";
+            $username = "admin_test";
+            $password = "|@_6J"UO7sud@?f>";
             $options = array(
                 PDO::MYSQL_ATTR_SSL_CA => 'asset/db/DigiCertGlobalRootCA.crt.pem'
             );
